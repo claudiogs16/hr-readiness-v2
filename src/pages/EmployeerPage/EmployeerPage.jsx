@@ -6,17 +6,7 @@ import DesignCard from "../../components/DesignCard/DesignCard";
 import Dashboard from "../../templates/Dashboard/Dashboard";
 import { Link } from "react-router-dom";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
-
-
-function ActionComponent() {
-  return (
-    <Link to="/definition" style={{ textDecoration: "none" }}>
-      <Button size="small" color="primary" variant="text">
-        <KeyboardReturnIcon />
-      </Button>
-    </Link>
-  );
-}
+import ReturnButton from "../../components/ReturnButton/ReturnButton";
 
 
 const EmployeerPage = () => {
@@ -87,7 +77,7 @@ const EmployeerPage = () => {
     <Dashboard>
       <Container>
         <Grid container>
-          <DesignCard action={<ActionComponent />}>
+          <DesignCard action={<ReturnButton url='/definition' />}>
           <Grid item xs={12}>
             <MaterialTable
               editable={{

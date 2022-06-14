@@ -4,6 +4,7 @@ import Dashboard from "../../templates/Dashboard/Dashboard";
 import { makeStyles } from "@material-ui/styles";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import { Link } from "react-router-dom";
+import ReturnButton from "../../components/ReturnButton/ReturnButton";
 
 const useStyles = makeStyles({
   container: {
@@ -14,22 +15,14 @@ const useStyles = makeStyles({
   },
 });
 
-function ActionComponent() {
-  return (
-    <Link to="/definition" style={{ textDecoration: "none" }}>
-      <Button size="small" color="primary" variant="text">
-        <KeyboardReturnIcon />
-      </Button>
-    </Link>
-  );
-}
+
 
 const PasswordChange = () => {
   const classes = useStyles();
   return (
     <Dashboard>
       <Container maxWidth="xs" className={classes.container}>
-        <DesignCard title="Alterar Senha" action={<ActionComponent />}>
+        <DesignCard title="Alterar Senha" action={<ReturnButton url='/definition' />}>
           <Grid container>
             <Grid item xs={12}>
               <TextField

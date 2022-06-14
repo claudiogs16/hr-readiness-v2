@@ -9,6 +9,7 @@ import VpnKeyIcon from "@mui/icons-material/VpnKey";
 import ConstructionIcon from "@mui/icons-material/Construction";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import { Link } from "react-router-dom";
+import ReturnButton from "../../components/ReturnButton/ReturnButton";
 
 const useStyles = makeStyles({
   container: {
@@ -26,22 +27,13 @@ function ButtonComponent(props) {
   );
 }
 
-function ActionComponent() {
-  return (
-    <Link to="/" style={{ textDecoration: "none" }}>
-      <Button size="small" color="primary" variant="text">
-        <KeyboardReturnIcon />
-      </Button>
-    </Link>
-  );
-}
 
 const DefinitionPage = () => {
   const classes = useStyles();
   return (
     <Dashboard>
       <Container maxWidth="sm" className={classes.container}>
-        <DesignCard title="Definições" action={<ActionComponent />}>
+        <DesignCard title="Definições" action={<ReturnButton url='/' />}>
           <Grid container spacing={2}>
             <Grid item xs={6} sm={4}>
               <ItemMenuCard

@@ -4,16 +4,8 @@ import Dashboard from "../../templates/Dashboard/Dashboard";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/styles";
+import ReturnButton from "../../components/ReturnButton/ReturnButton";
 
-function ActionComponent() {
-  return (
-    <Link to="/definition" style={{ textDecoration: "none" }}>
-      <Button size="small" color="primary" variant="text">
-        <KeyboardReturnIcon />
-      </Button>
-    </Link>
-  );
-}
 
 const useStyles = makeStyles({
   container: {
@@ -29,7 +21,7 @@ const SystemPage = () => {
   return (
     <Dashboard>
       <Container maxWidth="xs">
-        <DesignCard title="Sistema" action={<ActionComponent />}>
+        <DesignCard title="Sistema" action={<ReturnButton url='/definition' />}>
           <Grid container style={{ marginTop: "30px" }}>
             <Grid item xs={12}>
               <TextField
