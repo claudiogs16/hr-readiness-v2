@@ -6,6 +6,7 @@ import DefinitionPage from "./pages/DefinitionPage/DefinitionPage";
 import EmployeerPage from "./pages/EmployeerPage/EmployeerPage";
 import HomePage from "./pages/HomePage/HomePage";
 import PasswordChange from "./pages/PasswordChange/PasswordChange";
+import PostPage from "./pages/PostPage/PostPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import SystemPage from "./pages/SystemPage/SystemPage";
 
@@ -22,6 +23,7 @@ function App() {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/system" element={<SystemPage />} />
           <Route path="/employeer" element={<EmployeerPage />} />
+          <Route path="/post" element={<PostPage />} />
           <Route path="/login" element={<>Login</>} />
           <Route path="/employees" element={<>Employees</>} />
         </Routes>

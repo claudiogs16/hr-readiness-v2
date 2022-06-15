@@ -44,7 +44,7 @@ const DefinitionPage = () => {
             <Grid item xs={6} sm={4}>
               <ItemMenuCard
                 icon={<SupervisedUserCircleIcon fontSize="large" />}
-                button={<ButtonComponent name="Cargo" url="/password" />}
+                button={<ButtonComponent name="Cargo" url="/post" />}
               />
             </Grid>
             <Grid item xs={6} sm={4}>
