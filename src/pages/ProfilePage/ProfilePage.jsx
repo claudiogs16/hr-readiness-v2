@@ -3,22 +3,14 @@ import DesignCard from "../../components/DesignCard/DesignCard";
 import Dashboard from "../../templates/Dashboard/Dashboard";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import { Link } from "react-router-dom";
+import ReturnButton from "../../components/ReturnButton/ReturnButton";
 
-function ActionComponent() {
-  return (
-    <Link to="/" style={{ textDecoration: "none" }}>
-      <Button size="small" color="primary" variant="text">
-        <KeyboardReturnIcon />
-      </Button>
-    </Link>
-  );
-}
 
 const ProfilePage = () => {
   return (
     <Dashboard>
       <Container maxWidth="sm">
-        <DesignCard title="Perfil" action={<ActionComponent />}>
+        <DesignCard title="Perfil" action={<ReturnButton url='/' />}>
           <Grid container spacing={4} style={{ marginTop: "20px" }}>
             <Grid item xs={12} sm={6}>
               <TextField

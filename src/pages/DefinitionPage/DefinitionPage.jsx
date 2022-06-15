@@ -7,9 +7,10 @@ import Dashboard from "../../templates/Dashboard/Dashboard";
 import GroupIcon from "@mui/icons-material/Group";
 import VpnKeyIcon from "@mui/icons-material/VpnKey";
 import ConstructionIcon from "@mui/icons-material/Construction";
-import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import { Link } from "react-router-dom";
 import ReturnButton from "../../components/ReturnButton/ReturnButton";
+import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 const useStyles = makeStyles({
   container: {
@@ -27,30 +28,44 @@ function ButtonComponent(props) {
   );
 }
 
-
 const DefinitionPage = () => {
   const classes = useStyles();
   return (
     <Dashboard>
       <Container maxWidth="sm" className={classes.container}>
-        <DesignCard title="Definições" action={<ReturnButton url='/' />}>
+        <DesignCard title="Definições" action={<ReturnButton url="/" />}>
           <Grid container spacing={2}>
             <Grid item xs={6} sm={4}>
               <ItemMenuCard
                 icon={<GroupIcon fontSize="large" />}
-                button={<ButtonComponent name="Funcionário" url='/employeer' />}
+                button={<ButtonComponent name="Funcionário" url="/employeer" />}
+              />
+            </Grid>
+            <Grid item xs={6} sm={4}>
+              <ItemMenuCard
+                icon={<SupervisedUserCircleIcon fontSize="large" />}
+                button={<ButtonComponent name="Cargo" url="/password" />}
+              />
+            </Grid>
+            <Grid item xs={6} sm={4}>
+              <ItemMenuCard
+                icon={<VisibilityIcon fontSize="large" />}
+                button={<ButtonComponent name="Permissão" url="/password" />}
               />
             </Grid>
             <Grid item xs={6} sm={4}>
               <ItemMenuCard
                 icon={<ConstructionIcon fontSize="large" />}
-                button={<ButtonComponent name="Sistema" url='/system' />}
+                button={<ButtonComponent name="Sistema" url="/system" />}
               />
             </Grid>
+
             <Grid item xs={6} sm={4}>
               <ItemMenuCard
                 icon={<VpnKeyIcon fontSize="large" />}
-                button={<ButtonComponent name="Alterar Senha" url='/password'  />}
+                button={
+                  <ButtonComponent name="Alterar Senha" url="/password" />
+                }
               />
             </Grid>
           </Grid>
