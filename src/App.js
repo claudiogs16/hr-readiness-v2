@@ -8,6 +8,8 @@ import HomePage from "./pages/HomePage/HomePage";
 import PasswordChange from "./pages/PasswordChange/PasswordChange";
 import PostPage from "./pages/PostPage/PostPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import RatingPage from "./pages/RatingPage/RatingPage";
+import RolePage from "./pages/RolePage/RolePage";
 import SystemPage from "./pages/SystemPage/SystemPage";
 
 function App() {
@@ -24,6 +26,8 @@ function App() {
           <Route path="/system" element={<SystemPage />} />
           <Route path="/employeer" element={<EmployeerPage />} />
           <Route path="/post" element={<PostPage />} />
+          <Route path="/role" element={<RolePage />} />
+          <Route path="/rating" element={<RatingPage />} />
           <Route path="/login" element={<>Login</>} />
           <Route path="/employees" element={<>Employees</>} />
         </Routes>

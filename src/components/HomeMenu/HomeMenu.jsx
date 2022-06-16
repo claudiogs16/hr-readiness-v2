@@ -23,9 +23,11 @@ function ComponentAction() {
           Perfil
         </Button>
       </Link>
+      <Link to='/rating' className={classes.link}>
       <Button variant="text" size="small">
         Avaliação
       </Button>
+      </Link>
       <Link to="/definition" className={classes.link}>
         <Button variant="text" size="small">
           Definições

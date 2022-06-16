@@ -50,7 +50,7 @@ const DefinitionPage = () => {
             <Grid item xs={6} sm={4}>
               <ItemMenuCard
                 icon={<VisibilityIcon fontSize="large" />}
-                button={<ButtonComponent name="Permissão" url="/password" />}
+                button={<ButtonComponent name="Permissão" url="/role" />}
               />
             </Grid>
             <Grid item xs={6} sm={4}>

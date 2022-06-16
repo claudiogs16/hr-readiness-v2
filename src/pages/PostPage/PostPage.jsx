@@ -8,13 +8,12 @@ import { useState } from "react";
 
 const PostPage = () => {
   const [tabledata, setTableData] = useState([
-    { post: "Recursos Humanos" },
-    { post: "CEO" },
-    { post: "Programador" },
-    { post: "Designer" },
+    { cod: 'RH', post: "Recursos Humanos" },
+    { cod: 'Dev', post: "Programador" },
+    { cod: 'CEO', post: "Chefe Executivo" },
   ]);
 
-  const columns = [{ title: "Cargo", field: "post" }];
+  const columns = [{ title: "Sigla", field: "cod" },{ title: "Cargo", field: "post" }];
   return (
     <Dashboard>
       <Container maxWidth="sm">
