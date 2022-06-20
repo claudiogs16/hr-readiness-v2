@@ -4,7 +4,14 @@ import HomeIcon from "@mui/icons-material/Home";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ConstructionIcon from "@mui/icons-material/Construction";
 import CustomLink from "../../styled/custom-link.styled";
-import { Box, Divider, List, ListItem, SwipeableDrawer } from "@mui/material";
+import {
+  Box,
+  Divider,
+  List,
+  ListItem,
+  SwipeableDrawer,
+  Tooltip,
+} from "@mui/material";
 import { useState } from "react";
 
 const SideBar = () => {
@@ -34,17 +41,23 @@ const SideBar = () => {
           <List>
             <CustomLink to="/">
               <ListItem button onClick={() => setOpen(false)}>
-                <HomeIcon />
+                <Tooltip placement="left-start" title="Pagina Inicial">
+                  <HomeIcon />
+                </Tooltip>
               </ListItem>
             </CustomLink>
             <CustomLink to="dashboard">
               <ListItem button onClick={() => setOpen(false)}>
-                <DashboardIcon />
+                <Tooltip placement="left-start" title="Dashboard">
+                  <DashboardIcon />
+                </Tooltip>
               </ListItem>
             </CustomLink>
             <CustomLink to="definition">
               <ListItem button onClick={() => setOpen(false)}>
-                <ConstructionIcon />
+                <Tooltip placement="left-start" title="Definições">
+                  <ConstructionIcon />
+                </Tooltip>
               </ListItem>
             </CustomLink>
           </List>
