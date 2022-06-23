@@ -6,7 +6,7 @@ const MainTemplate = (props) => {
     <Container
       sx={{
         margin: "0 auto",
-        maxWidth: { md: "1100px" },
+        maxWidth: { md: props.maxWidth },
       }}
     >
       {props.title && <TitlePage title={props.title} />}

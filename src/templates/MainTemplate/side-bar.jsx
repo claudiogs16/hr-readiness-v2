@@ -3,7 +3,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import HomeIcon from "@mui/icons-material/Home";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ConstructionIcon from "@mui/icons-material/Construction";
-import CustomLink from "../../styled/custom-link.styled";
 import {
   Box,
   Divider,
@@ -13,9 +12,11 @@ import {
   Tooltip,
 } from "@mui/material";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const SideBar = () => {
   const [open, setOpen] = useState(false);
+  let navigate = useNavigate();
   return (
     <div>
       <IconButton
@@ -39,27 +40,41 @@ const SideBar = () => {
           </Box>
           <Divider />
           <List>
-            <CustomLink to="/">
-              <ListItem button onClick={() => setOpen(false)}>
-                <Tooltip placement="left-start" title="Pagina Inicial">
-                  <HomeIcon />
-                </Tooltip>
-              </ListItem>
-            </CustomLink>
-            <CustomLink to="dashboard">
-              <ListItem button onClick={() => setOpen(false)}>
-                <Tooltip placement="left-start" title="Dashboard">
-                  <DashboardIcon />
-                </Tooltip>
-              </ListItem>
-            </CustomLink>
-            <CustomLink to="definition">
-              <ListItem button onClick={() => setOpen(false)}>
-                <Tooltip placement="left-start" title="Definições">
-                  <ConstructionIcon />
-                </Tooltip>
-              </ListItem>
-            </CustomLink>
+            <ListItem
+              button
+              onClick={() => {
+                setOpen(false);
+                navigate("/");
+              }}
+            >
+              <Tooltip placement="left-start" title="Pagina Inicial">
+                <HomeIcon />
+              </Tooltip>
+            </ListItem>
+
+            <ListItem
+              button
+              onClick={() => {
+                setOpen(false);
+                navigate("dashboard");
+              }}
+            >
+              <Tooltip placement="left-start" title="Dashboard">
+                <DashboardIcon />
+              </Tooltip>
+            </ListItem>
+
+            <ListItem
+              button
+              onClick={() => {
+                setOpen(false);
+                navigate("definition");
+              }}
+            >
+              <Tooltip placement="left-start" title="Definições">
+                <ConstructionIcon />
+              </Tooltip>
+            </ListItem>
           </List>
         </div>
       </SwipeableDrawer>

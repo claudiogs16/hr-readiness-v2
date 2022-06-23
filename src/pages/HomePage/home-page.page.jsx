@@ -26,7 +26,7 @@ const HomePageMenu = () => {
 
 const HomePage = () => {
   return (
-    <MainTemplate title="Pagina Inicial">
+    <MainTemplate title="Pagina Inicial" maxWidth='lg'>
       <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
           {/* Card Profile */}

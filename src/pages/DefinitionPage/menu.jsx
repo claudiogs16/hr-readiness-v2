@@ -5,7 +5,6 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import ConstructionIcon from "@mui/icons-material/Construction";
 import PasswordIcon from "@mui/icons-material/Password";
 import GroupWorkIcon from "@mui/icons-material/GroupWork";
-import EmployeerForm from "./EmployeerPage/employeer-form.page";
 
 const Menu = () => {
   return (
@@ -15,28 +14,31 @@ const Menu = () => {
           <MenuItem
             icon={<GroupIcon fontSize="large" />}
             title="Funcionários"
-            modalContent={<EmployeerForm />}
+            url='employeer'
           />
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <MenuItem icon={<GroupWorkIcon fontSize="large" />} title="Cargo" />
+          <MenuItem icon={<GroupWorkIcon fontSize="large" />} title="Cargo" url='post-role' />
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
           <MenuItem
             icon={<VisibilityIcon fontSize="large" />}
             title="Permissão"
+            url='role'
           />
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
           <MenuItem
             icon={<ConstructionIcon fontSize="large" />}
             title="Sistema"
+            url='/definition/system'
           />
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
           <MenuItem
             icon={<PasswordIcon fontSize="large" />}
             title="Repor Senhas"
+            url='/definition/password-reset'
           />
         </Grid>
       </Grid>
