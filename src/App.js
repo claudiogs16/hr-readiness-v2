@@ -6,6 +6,8 @@ import DefinitionPage from "./pages/DefinitionPage/definition-page.page";
 import EmployeerList from "./pages/DefinitionPage/EmployeerPage/employeer-list";
 import EmployeerNew from "./pages/DefinitionPage/EmployeerPage/employeer-new";
 import EmployeerPage from "./pages/DefinitionPage/EmployeerPage/Employeer-page.page";
+import DimensionList from "./pages/DimensionPage/dimension-list";
+import DimensionPage from "./pages/DimensionPage/dimension-page.page";
 import HomePage from "./pages/HomePage/home-page.page";
 import PasswordResetForm from "./pages/PasswordResetPage/password-reset-form";
 import PasswordResetPage from "./pages/PasswordResetPage/password-reset-page.page";
@@ -39,6 +41,9 @@ function App() {
             <Route path="/definition/post-role" element={<PostRolePage />}>
               <Route index element={<PostRoleList />} />
               <Route path="new" element={<PostRoleForm />} />
+            </Route>
+            <Route path="/definition/dimension" element={<DimensionPage />}>
+              <Route index element={<DimensionList />} />
             </Route>
             <Route path="/definition/password-reset" element={<PasswordResetPage />}>
               <Route index element={<PasswordResetForm />} />

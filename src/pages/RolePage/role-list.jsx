@@ -1,53 +1,20 @@
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import Typography from '@mui/material/Typography';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import CustomAccordion from "../../components/Accordion/custom-accordion.component";
+import EmployeerList from "../../components/EmployeerList/employeer-list.component";
 
 const RoleList = () => {
-    return (
-        <div>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography>Super Administrador</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-              malesuada lacus ex, sit amet blandit leo lobortis eget.
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel2a-content"
-            id="panel2a-header"
-          >
-            <Typography>Administrador</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-              malesuada lacus ex, sit amet blandit leo lobortis eget.
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
-        <Accordion >
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel3a-content"
-            id="panel3a-header"
-          >
-            <Typography>Colaboradores</Typography>
-          </AccordionSummary>
-        </Accordion>
-      </div>
-    );
-}
- 
+  return (
+    <>
+      <CustomAccordion title="Super Administrador">
+        <EmployeerList />
+      </CustomAccordion>
+      <CustomAccordion title="Administradores">
+        <EmployeerList />
+      </CustomAccordion>
+      <CustomAccordion title="Colaboradores">
+        <EmployeerList />
+      </CustomAccordion>
+    </>
+  );
+};
+
 export default RoleList;
