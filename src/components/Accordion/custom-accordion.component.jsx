@@ -6,7 +6,7 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-const CustomAccordion = (props) => {
+const CustomAccordion = ({title, children}) => {
   return (
     <Accordion>
       <AccordionSummary
@@ -15,9 +15,9 @@ const CustomAccordion = (props) => {
         id="panel1a-header"
         style={{ background: "#F9FAFE" }}
       >
-        <Typography>{props.title}</Typography>
+        <Typography>{title}</Typography>
       </AccordionSummary>
-      <AccordionDetails>{props.children}</AccordionDetails>
+      <AccordionDetails>{children}</AccordionDetails>
     </Accordion>
   );
 };
