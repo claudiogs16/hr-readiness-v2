@@ -9,6 +9,7 @@ import EmployeerPage from "./pages/DefinitionPage/EmployeerPage/Employeer-page.p
 import DimensionList from "./pages/DimensionPage/dimension-list";
 import DimensionPage from "./pages/DimensionPage/dimension-page.page";
 import HomePage from "./pages/HomePage/home-page.page";
+import NewPasswordPage from "./pages/NewPasswordPage/new-password-page.page";
 import PasswordResetForm from "./pages/PasswordResetPage/password-reset-form";
 import PasswordResetPage from "./pages/PasswordResetPage/password-reset-page.page";
 import PostRoleForm from "./pages/PostRolePage/post-role-form";
@@ -51,6 +52,7 @@ function App() {
             <Route path="/definition/system" element={<SystemPage />}>
               <Route index element={<SystemForm />} />
             </Route>
+            <Route path="new-password" element={<NewPasswordPage />} />
           </Route>
           <Route path="*" element={<h1>Pagina de Erro!!</h1>} />
         </Routes>

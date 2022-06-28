@@ -7,9 +7,9 @@ const MenuItem = (props) => {
   return (
     <Card
       elevation={0}
-      style={{ borderRadius: "15px", backgroundColor: "#F9FAFE" }}
+      style={{ borderRadius: "15px", backgroundColor: props.bgcolor, height: "120px" }}
     >
-      <CardContent style={{ textAlign: "center" }}>
+      <CardContent style={{ textAlign: "center", fontSize: "3px" }}>
         {props.icon}
         <Button
           onClick={() => navigate(props.url)}

@@ -7,7 +7,7 @@ import PasswordIcon from "@mui/icons-material/Password";
 import GroupWorkIcon from "@mui/icons-material/GroupWork";
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 
-const Menu = () => {
+const MenuRight = () => {
   return (
     <>
       <Grid container spacing={2}>
@@ -16,19 +16,18 @@ const Menu = () => {
             icon={<GroupIcon fontSize="large" />}
             title="Funcionários"
             url='employeer'
+            bgcolor="#F0FBFE"
           />
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <MenuItem icon={<GroupWorkIcon fontSize="large" />} title="Cargo" url='post-role' />
-        </Grid>
-        <Grid item xs={12} sm={6} md={4}>
-          <MenuItem icon={<AccountTreeIcon fontSize="large" />} title="Dimensão" url='dimension' />
+          <MenuItem icon={<GroupWorkIcon fontSize="large" />} title="Cargo" url='post-role' bgcolor="#F0FBFE" />
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
           <MenuItem
             icon={<VisibilityIcon fontSize="large" />}
             title="Permissão"
             url='role'
+            bgcolor="#F0FBFE"
           />
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
@@ -36,6 +35,7 @@ const Menu = () => {
             icon={<ConstructionIcon fontSize="large" />}
             title="Sistema"
             url='/definition/system'
+            bgcolor="#F0FBFE"
           />
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
@@ -43,6 +43,7 @@ const Menu = () => {
             icon={<PasswordIcon fontSize="large" />}
             title="Repor Senhas"
             url='/definition/password-reset'
+            bgcolor="#F0FBFE"
           />
         </Grid>
       </Grid>
@@ -50,4 +51,4 @@ const Menu = () => {
   );
 };
 
-export default Menu;
+export default MenuRight;
