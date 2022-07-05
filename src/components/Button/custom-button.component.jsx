@@ -1,8 +1,8 @@
 import { Button } from "@mui/material";
 
-const CustomButton = props => {
+const CustomButton = ({onClick, name}) => {
     return (
-        <Button size="large" variant="contained" fullWidth>{props.name}</Button>
+        <Button onClick={onClick} size="large" variant="contained" fullWidth>{name}</Button>
     );
 }
  

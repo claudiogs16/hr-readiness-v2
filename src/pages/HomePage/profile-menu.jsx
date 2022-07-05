@@ -1,6 +1,8 @@
 import { Button, Stack } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const ProfileMenu = () => {
+  let navigate = useNavigate();
   return (
     <Stack direction='row' spacing={2}>
       <Button
@@ -11,7 +13,7 @@ const ProfileMenu = () => {
       >
         Perfil
       </Button>
-      <Button variant="text" size="small">Alterar Senha</Button>
+      <Button onClick={() => navigate("/password-change")} variant="text" size="small">Alterar Senha</Button>
     </Stack>
   );
 };

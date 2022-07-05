@@ -11,8 +11,11 @@ const CustomList = ({title}) => {
     <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
       <nav aria-label="main mailbox folders">
         <List>
-          <CustomListItem description="Claudio Gomes" icon={<PersonIcon />} />
-          <CustomListItem description="Vitor Manuel Pires Mendes" icon={<PersonIcon />} />
+          <CustomListItem description="Item 1" icon={<PersonIcon />} />
+          <CustomListItem description="Item 2" icon={<PersonIcon />} />
+          <CustomListItem description="Item 3" icon={<PersonIcon />} />
+          <CustomListItem description="Item 4" icon={<PersonIcon />} />
+          <CustomListItem description="Item 5" icon={<PersonIcon />} />
         </List>
       </nav>
       

@@ -33,6 +33,7 @@ const DefinitionPage = () => {
                   bgcolor="#EDF4E9"
                   btnName="Dimensões"
                   icon={<AccountTreeIcon fontSize="large" />}
+                  url="/definition/dimension"
                 />
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
@@ -40,6 +41,7 @@ const DefinitionPage = () => {
                   bgcolor="#EDF4E9"
                   btnName="Indicadores"
                   icon={<PushPinIcon fontSize="large" />}
+                  url="/definition/indicator"
                 />
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
@@ -47,6 +49,7 @@ const DefinitionPage = () => {
                   bgcolor="#EDF4E9"
                   btnName="Questões"
                   icon={<QuestionAnswerIcon fontSize="large" />}
+                  url="/definition/question"
                 />
               </Grid>
             </Grid>

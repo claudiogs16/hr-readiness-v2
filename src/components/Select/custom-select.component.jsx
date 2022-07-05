@@ -1,14 +1,14 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
-const CustomSelect = props => {
+const CustomSelect = ({label}) => {
   return (
     <FormControl fullWidth>
-      <InputLabel id="demo-simple-select-label">{props.label}</InputLabel>
+      <InputLabel id="demo-simple-select-label">{label}</InputLabel>
       <Select
         labelId="demo-simple-select-label"
         id="demo-simple-select"
         
-        label={props.label}
+        label={label}
       >
         <MenuItem value={10}>Ten</MenuItem>
         <MenuItem value={20}>Twenty</MenuItem>
