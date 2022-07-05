@@ -65,7 +65,7 @@ function App() {
               <Route index element={<QuestionList />} />
               <Route path="new" element={<QuestionForm />} />
             </Route>
-            <Route path="/password-change"  element={<PasswordChangePage />}/>
+            <Route path="/password-change" element={<PasswordChangePage />} />
           </Route>
           <Route path="/password-create" element={<PasswordCreatePage />} />
           <Route path="/login" element={<LoginPage />} />
