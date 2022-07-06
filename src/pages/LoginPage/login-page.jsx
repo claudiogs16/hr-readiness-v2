@@ -1,12 +1,12 @@
-import { Avatar, Container, Grid, Typography } from "@mui/material";
+import { Avatar, Chip, Container, Grid, Typography } from "@mui/material";
 import CustomButton from "../../components/Button/custom-button.component";
 import MainCard from "../../components/MainCard/main-card.component";
 import CustomTextField from "../../components/TextField/custom-text-field.component";
-import LockOpenIcon from '@mui/icons-material/LockOpen';
+import LockOpenIcon from "@mui/icons-material/LockOpen";
 import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
-    let navigate = useNavigate();
+  let navigate = useNavigate();
   return (
     <Container maxWidth="xs" sx={{ marginTop: { xs: "70px", md: "50px" } }}>
       <MainCard>
@@ -27,11 +27,20 @@ const LoginPage = () => {
             <Grid item xs={12}>
               <CustomTextField label="Email" />
             </Grid>
+            <Grid item xs={12} style={{textAlign: 'center'}}>
+              <Typography  style={{marginBottom: '10px', opacity: .8}}>Seja Bem-vindo</Typography>
+              <Chip
+                label="claudiogs16@gmail.com"
+                variant="outlined"
+                onClick={() => {}}
+                onDelete={() => {}}
+              />
+            </Grid>
             <Grid item xs={12}>
               <CustomTextField label="Senha" />
             </Grid>
             <Grid item xs={12}>
-              <CustomButton onClick={() => navigate('/')}  name="Seguinte" />
+              <CustomButton type='button' onClick={() => navigate("/")} name="Seguinte" />
             </Grid>
           </Grid>
         </div>

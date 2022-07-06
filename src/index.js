@@ -1,7 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
-import App from './App';
+import App from "./App";
 
 const client = new ApolloClient({
   uri: "https://hr.sintaxy.com/api/graphql",
@@ -9,6 +9,8 @@ const client = new ApolloClient({
 });
 
 ReactDOM.render(
-  <ApolloProvider client={client}><App /></ApolloProvider>,
-  document.getElementById('root')
-)
+  <ApolloProvider client={client}>
+    <App />
+  </ApolloProvider>,
+  document.getElementById("root")
+);
