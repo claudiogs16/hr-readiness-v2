@@ -13,7 +13,7 @@ import HomePage from "./pages/HomePage/home.page";
 import IndicatorForm from "./pages/IndicatorPage/indicator-form";
 import IndicatorList from "./pages/IndicatorPage/indicator-list";
 import IndicatorPage from "./pages/IndicatorPage/indicator.page";
-import LoginPage from "./pages/LoginPage/login-page";
+import LoginPage from "./pages/LoginPage/login.page";
 import PasswordChangePage from "./pages/PasswordChangePage/password-change.page";
 import PasswordCreatePage from "./pages/PasswordCreate/password-create.page";
 import PasswordResetPage from "./pages/PasswordReset/password-reset.page";
