@@ -5,9 +5,12 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { USER_BY_EMAIL } from "../../gqloperation/query";
-import { useLazyQuery, useQuery } from "@apollo/client";
+import { useLazyQuery } from "@apollo/client";
 import { useEffect } from "react";
 import { useState } from "react";
+import { useContext } from "react";
+import { LoginContext } from "../../contexts/LoginContext";
+import { useNavigate } from "react-router-dom";
 
 const validationEmailForm = yup
   .object({
@@ -20,7 +23,27 @@ const validationEmailForm = yup
 
 let email = "";
 
-const EmailForm = ({ setForm, setEmailLogin, emailLogin }) => {
+const EmailForm = ({ setForm }) => {
+  const navigate = useNavigate();
+  const [error, setError] = useState(false);
+  const { setEmailLogin, emailLogin } = useContext(LoginContext);
+
+  const [
+    getUserByEmail,
+    { loading: loadingGetUserByEmail, data: dataGetUserByEmail },
+  ] = useLazyQuery(USER_BY_EMAIL, {
+    variables: {
+      filters: {
+        email: {
+          eq: email,
+        },
+        blocked: {
+          eq: false,
+        },
+      },
+    },
+  });
+
   const {
     register,
     handleSubmit,
@@ -29,44 +52,30 @@ const EmailForm = ({ setForm, setEmailLogin, emailLogin }) => {
     resolver: yupResolver(validationEmailForm),
   });
 
-  const [getUserByEmail, { loading, data }] = useLazyQuery(
-    USER_BY_EMAIL,
-    {
-      variables: {
-        filters: {
-          email: {
-            eq: email,
-          },
-          blocked: {
-            eq: false,
-          },
-        },
-      },
-    }
-  );
-
-
-  const [error, setError] = useState(false);
-
   useEffect(() => {
-    console.log(data)
-    if (data && (data.usersPermissionsUsers.data.length > 0)) {
-      if (data.usersPermissionsUsers.data[0].attributes.isResetPassword) {
-        setEmailLogin(data.usersPermissionsUsers.data[0].attributes.email);
-        setForm("NEW_PASSWORD");
+    if (
+      dataGetUserByEmail &&
+      dataGetUserByEmail.usersPermissionsUsers.data.length > 0
+    ) {
+      if (
+        dataGetUserByEmail.usersPermissionsUsers.data[0].attributes
+          .isResetPassword
+      ) {
+        setEmailLogin(email);
+        navigate("/password-create");
       } else {
-        setEmailLogin(data.usersPermissionsUsers.data[0].attributes.email);
+        setEmailLogin(email);
         setForm("PASSWORD");
       }
-    }else{
-      setError(true)
-    } 
-  }, [data]);
+    } else {
+      setError(true);
+    }
+  }, [dataGetUserByEmail]);
 
-  useEffect(()=>{
-    setError(false)
+  useEffect(() => {
+    setError(false);
     setEmailLogin("");
-  }, [])
+  }, []);
 
   const emailForm = (formData) => {
     email = document.getElementById("email").value;

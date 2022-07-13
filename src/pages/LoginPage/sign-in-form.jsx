@@ -1,58 +1,16 @@
-import {
-  Alert,
-  Avatar,
-  Chip,
-  CircularProgress,
-  Grid,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Avatar, Chip, Grid, TextField, Typography } from "@mui/material";
 import CustomButton from "../../components/Button/custom-button.component";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { useMutation } from "@apollo/client";
-import { LOGIN_USER } from "../../gqloperation/mutation";
+import { useContext } from "react";
+import { LoginContext } from "../../contexts/LoginContext";
+import { useNavigate } from "react-router-dom";
 
-const validationEmailForm = yup
-  .object({
-    password: yup
-      .string()
-      .min(3, "A senha precisa ter mais de 3 caracteres")
-      .required("A senha é obrigatória"),
-  })
-  .required();
-const SignInForm = ({ email }) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(validationEmailForm),
-  });
-
-  const [loginUser, { loading, error, data }] = useMutation(LOGIN_USER);
-
-  const signInForm = (formData) => {
-    loginUser({
-      variables: {
-        input: formData,
-      },
-    });
-  };
-
-  if (loading)
-    return (
-      <div style={{ margin: "0 auto" }}>
-        <CircularProgress />
-      </div>
-    );
-
-  if (data) console.log(data.login.user.email);
+const SignInForm = ({setForm}) => {
+  const navigate = useNavigate();
+  const { emailLogin } = useContext(LoginContext);
 
   return (
-    <form onSubmit={handleSubmit(signInForm)} noValidate>
+    <form noValidate>
       <div style={{ marginLeft: 30, marginRight: 30, marginBottom: 30 }}>
         <Grid container spacing={3}>
           <Grid item xs={12} align="center" style={{ marginBottom: "20px" }}>
@@ -70,26 +28,21 @@ const SignInForm = ({ email }) => {
           <Grid
             item
             xs={12}
-            style={{ textAlign: "center", marginBottom: "20px" }}
+            style={{ textAlign: "center", marginBottom: "10px" }}
           >
             <Typography style={{ marginBottom: "10px", opacity: 0.8 }}>
               Seja Bem-vindo
             </Typography>
             <Chip
-              label={email}
+              label={emailLogin}
               variant="outlined"
               onClick={() => {}}
-              onDelete={() => {}}
+              onDelete={() => navigate('/login')}
             />
           </Grid>
 
           <Grid item xs={12}>
-            <input
-              type="hidden"
-              name="identifier"
-              value={email}
-              {...register("identifier")}
-            />
+            <input type="hidden" name="identifier" />
             <TextField
               required
               label="Senha"
@@ -97,17 +50,10 @@ const SignInForm = ({ email }) => {
               fullWidth
               type="password"
               name="password"
-              {...register("password")}
-              helperText={errors.password?.message}
             />
           </Grid>
           <Grid item xs={12}>
             <CustomButton type="submit" name="Acessar" />
-            {error && (
-              <Alert severity="error" style={{ marginTop: 20 }}>
-                Senha incorrecta. Tente novamente ou entre em contacto com administrador
-              </Alert>
-            )}
           </Grid>
         </Grid>
       </div>

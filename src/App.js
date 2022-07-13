@@ -2,6 +2,7 @@ import { CssBaseline } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import TopBar from "./components/TopBar/top-bar.component";
+import { LoginContextProvider } from "./contexts/LoginContext";
 import DefinitionPage from "./pages/DefinitionPage/definition.page";
 import DimensionForm from "./pages/DimensionPage/dimension-form.page";
 import DimensionList from "./pages/DimensionPage/dimension-list.page";
@@ -31,6 +32,7 @@ import theme from "./theme";
 function App() {
   return (
     <ThemeProvider theme={theme}>
+      <LoginContextProvider>
       <CssBaseline />
       <Router>
         <Routes>
@@ -67,11 +69,14 @@ function App() {
             </Route>
             <Route path="/password-change" element={<PasswordChangePage />} />
           </Route>
-          <Route path="/password-create" element={<PasswordCreatePage />} />
-          <Route path="/login" element={<LoginPage />} />
+          
+            <Route path="/password-create" element={<PasswordCreatePage />} />
+            <Route path="/login" element={<LoginPage />} />
+         
           <Route path="*" element={<h1>Pagina de Erro!!</h1>} />
         </Routes>
       </Router>
+      </LoginContextProvider>
     </ThemeProvider>
   );
 }
