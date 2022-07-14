@@ -1,4 +1,4 @@
-import { Avatar, Grid, TextField, Typography } from "@mui/material";
+import { Alert, Avatar, Grid, TextField, Typography } from "@mui/material";
 import { Container } from "@mui/system";
 import CustomButton from "../../components/Button/custom-button.component";
 import MainCard from "../../components/MainCard/main-card.component";
@@ -33,16 +33,13 @@ const PasswordCreatePage = () => {
   const { emailLogin, setEmailLogin } = useContext(LoginContext);
   const [jwt, setJwt] = useState("");
   const [id, setId] = useState("");
+  const [errorPassword, setErrorPassword] = useState(false);
 
-  const [
-    loginUser,
-    { loading: loadingLogin, error: errorLogin, data: dataLogin },
-  ] = useMutation(LOGIN_USER);
+  const [loginUser, { loading: loadingLogin, error: errorLogin }] =
+    useMutation(LOGIN_USER);
 
-  const [
-    updatePasswordUser,
-    { loading: loadingUpdate, error: errorUpdate, data: dataUpdate },
-  ] = useMutation(UPDATE_PASSWORD_USER);
+  const [updatePasswordUser, { loading: loadingUpdate, error: errorUpdate }] =
+    useMutation(UPDATE_PASSWORD_USER);
 
   const {
     register,
@@ -60,35 +57,36 @@ const PasswordCreatePage = () => {
           password: RESET_PASSWORD,
         },
       },
-    });
+    })
+      .then((data) => {
+        setJwt(data.data.login.jwt);
+        setId(data.data.login.user.id);
+      })
+      .catch((error) => {
+        console.log("Erro: " + error);
+      });
   }, []);
 
-  useEffect(() => {
-    if (dataUpdate) {
-      setEmailLogin("");
-      navigate("/login");
-    }
-  }, [dataUpdate]);
-
-  useEffect(() => {
-    if (dataLogin) {
-      setJwt(dataLogin.login.jwt);
-      setId(dataLogin.login.user.id);
-    }
-  }, [dataLogin]);
-
   const passwordForm = (dataForm) => {
-    updatePasswordUser({
-      variables: {
-        updateUsersPermissionsUserId: id,
-        data: { isResetPassword: false, password: dataForm.email },
-      },
-      context: {
-        headers: {
-          authorization: `Bearer ${jwt}`,
+    if (dataForm.password === dataForm.confirm_password) {
+      setErrorPassword(false);
+      updatePasswordUser({
+        variables: {
+          updateUsersPermissionsUserId: id,
+          data: { isResetPassword: false, password: dataForm.password },
         },
-      },
-    });
+        context: {
+          headers: {
+            authorization: `Bearer ${jwt}`,
+          },
+        },
+      }).then((data) => {
+        setEmailLogin("");
+        navigate("/login");
+      });
+    } else {
+      setErrorPassword(true);
+    }
   };
 
   return (
@@ -116,6 +114,7 @@ const PasswordCreatePage = () => {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  autoFocus
                   required
                   label="Nova Senha"
                   defaultValue=""
@@ -140,6 +139,11 @@ const PasswordCreatePage = () => {
               </Grid>
               <Grid item xs={12}>
                 <CustomButton type="submit" name="Criar" />
+                {errorPassword && (
+                  <Alert severity="error" style={{ marginTop: 20 }}>
+                    Essa não é a mesma senha que a primeira.
+                  </Alert>
+                )}
               </Grid>
             </Grid>
           </div>

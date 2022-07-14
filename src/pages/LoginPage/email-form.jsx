@@ -61,6 +61,10 @@ const EmailForm = ({ setForm }) => {
         dataGetUserByEmail.usersPermissionsUsers.data[0].attributes
           .isResetPassword
       ) {
+        console.log(
+          dataGetUserByEmail.usersPermissionsUsers.data[0].attributes
+            .isResetPassword
+        );
         setEmailLogin(email);
         navigate("/password-create");
       } else {
