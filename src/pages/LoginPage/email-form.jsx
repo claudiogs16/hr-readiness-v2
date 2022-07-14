@@ -42,6 +42,7 @@ const EmailForm = ({ setForm }) => {
         },
       },
     },
+    fetchPolicy: 'network-only'
   });
 
   const {
