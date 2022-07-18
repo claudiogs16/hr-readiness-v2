@@ -46,3 +46,24 @@ export const GET_ALL_USER_DATA_BY_ID = gql`
     }
   }
 `;
+
+export const GET_ALL_POST_ROLE = gql`
+query PostRoles {
+  postRoles {
+    data {
+      id
+      attributes {
+        postRole
+        users {
+          data {
+            attributes {
+              name
+            }
+            id
+          }
+        }
+      }
+    }
+  }
+}
+`;

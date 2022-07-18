@@ -11,11 +11,11 @@ const CustomList = ({title}) => {
     <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
       <nav aria-label="main mailbox folders">
         <List>
-          <CustomListItem description="Item 1" icon={<PersonIcon />} />
-          <CustomListItem description="Item 2" icon={<PersonIcon />} />
-          <CustomListItem description="Item 3" icon={<PersonIcon />} />
-          <CustomListItem description="Item 4" icon={<PersonIcon />} />
-          <CustomListItem description="Item 5" icon={<PersonIcon />} />
+          {
+            title && title.map(t => (
+              <CustomListItem key={t.id} description={t.attributes.name} icon={<PersonIcon />} />
+            ))
+          }
         </List>
       </nav>
       
