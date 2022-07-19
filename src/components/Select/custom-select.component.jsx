@@ -1,18 +1,18 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import CustomSelectItem from "./custom-select-item.component";
 
-const CustomSelect = ({label}) => {
+const CustomSelect = ({ label, values }) => {
+  console.log(values);
   return (
     <FormControl fullWidth>
       <InputLabel id="demo-simple-select-label">{label}</InputLabel>
       <Select
         labelId="demo-simple-select-label"
         id="demo-simple-select"
-        
         label={label}
       >
-        <MenuItem value={10}>Ten</MenuItem>
-        <MenuItem value={20}>Twenty</MenuItem>
-        <MenuItem value={30}>Thirty</MenuItem>
+        {values && values.map((v) => <CustomSelectItem items={v} />)}
+
       </Select>
     </FormControl>
   );

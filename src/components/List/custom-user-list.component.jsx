@@ -4,7 +4,7 @@ import CustomListItem from "./custom-list-item";
 import PersonIcon from "@mui/icons-material/Person";
 
 const CustomUserList = ({ users }) => {
-  console.log(users)
+  
   return (
     <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
       <nav aria-label="main mailbox folders">

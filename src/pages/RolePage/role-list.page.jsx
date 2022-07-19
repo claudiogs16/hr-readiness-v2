@@ -8,7 +8,7 @@ import { GET_ALL_USER_ROLE } from "../../gqloperation/query";
 const RoleList = () => {
   const jwt = localStorage.getItem("jwtToken");
 
-  const { loading, error, data } = useQuery(GET_ALL_USER_ROLE, {
+  const { loading, error, data: roleList } = useQuery(GET_ALL_USER_ROLE, {
     context: {
       headers: {
         authorization: `Bearer ${jwt}`,
@@ -23,8 +23,8 @@ const RoleList = () => {
 
   return (
     <>
-      {data &&
-        data.userRoles.data.map((userRoles) => (
+      {roleList &&
+        roleList.userRoles.data.map((userRoles) => (
           <CustomAccordion key={userRoles.id} title={userRoles.attributes.description}>
             <CustomUserList users={userRoles.attributes.users.data} />
           </CustomAccordion>

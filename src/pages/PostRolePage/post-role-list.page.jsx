@@ -11,7 +11,7 @@ const PostRoleList = () => {
   let navigate = useNavigate();
   const jwt = localStorage.getItem("jwtToken");
 
-  const { loading, error, data } = useQuery(GET_ALL_POST_ROLE, {
+  const { loading, error, data: postRoleList } = useQuery(GET_ALL_POST_ROLE, {
     context: {
       headers: {
         authorization: `Bearer ${jwt}`,
@@ -28,8 +28,8 @@ const PostRoleList = () => {
     <>
       <MenuCard itemRight={<AddButton onClick={() => navigate("new")} />} />
 
-      {data &&
-        data.postRoles.data.map((postRoles) => (
+      {postRoleList &&
+        postRoleList.postRoles.data.map((postRoles) => (
           <CustomAccordion key={postRoles.id} title={postRoles.attributes.postRole}>
             <CustomUserList users={postRoles.attributes.users.data} />
           </CustomAccordion>

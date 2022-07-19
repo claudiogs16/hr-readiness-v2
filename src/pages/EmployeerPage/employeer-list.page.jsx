@@ -13,7 +13,7 @@ const EmployeerList = () => {
   let navigate = useNavigate();
   const jwt = localStorage.getItem("jwtToken");
 
-  const { loading, error, data } = useQuery(GET_ALL_USERS, {
+  const { loading, error, data: employeerList } = useQuery(GET_ALL_USERS, {
     context: {
       headers: {
         authorization: `Bearer ${jwt}`,
@@ -31,7 +31,7 @@ const EmployeerList = () => {
       />
       <Grid container>
         <Grid item xs={12}>
-          {data && <CustomUserList users={data.usersPermissionsUsers.data} />}
+          {employeerList && <CustomUserList users={employeerList.usersPermissionsUsers.data} />}
         </Grid>
       </Grid>
     </>
