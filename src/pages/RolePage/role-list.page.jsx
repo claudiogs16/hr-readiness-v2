@@ -1,18 +1,35 @@
+import { useQuery } from "@apollo/client";
 import CustomAccordion from "../../components/Accordion/custom-accordion.component";
 import CustomList from "../../components/List/custom-list.component";
+import CustomUserList from "../../components/List/custom-user-list.component";
+import Loading from "../../components/Loading/loading.component";
+import { GET_ALL_USER_ROLE } from "../../gqloperation/query";
 
 const RoleList = () => {
+  const jwt = localStorage.getItem("jwtToken");
+
+  const { loading, error, data } = useQuery(GET_ALL_USER_ROLE, {
+    context: {
+      headers: {
+        authorization: `Bearer ${jwt}`,
+      },
+    },
+    fetchPolicy: "network-only"
+  });
+
+  if (loading) return <Loading />;
+
+  
+
   return (
     <>
-      <CustomAccordion title="Super Administrador">
-        <CustomList />
-      </CustomAccordion>
-      <CustomAccordion title="Administradores">
-        <CustomList />
-      </CustomAccordion>
-      <CustomAccordion title="Colaboradores">
-        <CustomList />
-      </CustomAccordion>
+      {data &&
+        data.userRoles.data.map((userRoles) => (
+          <CustomAccordion key={userRoles.id} title={userRoles.attributes.description}>
+            <CustomUserList users={userRoles.attributes.users.data} />
+          </CustomAccordion>
+        ))}
+      
     </>
   );
 };
