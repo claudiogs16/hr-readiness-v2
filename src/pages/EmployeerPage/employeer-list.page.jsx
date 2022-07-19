@@ -31,7 +31,7 @@ const EmployeerList = () => {
       />
       <Grid container>
         <Grid item xs={12}>
-          {employeerList && <CustomUserList users={employeerList.usersPermissionsUsers.data} />}
+          {employeerList && <CustomUserList id="employeer" users={employeerList.usersPermissionsUsers.data} />}
         </Grid>
       </Grid>
     </>

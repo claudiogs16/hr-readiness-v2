@@ -31,7 +31,7 @@ const PostRoleList = () => {
       {postRoleList &&
         postRoleList.postRoles.data.map((postRoles) => (
           <CustomAccordion key={postRoles.id} title={postRoles.attributes.postRole}>
-            <CustomUserList users={postRoles.attributes.users.data} />
+            <CustomUserList id="post-roles" users={postRoles.attributes.users.data} />
           </CustomAccordion>
         ))}
     </>

@@ -8,28 +8,32 @@ import { GET_ALL_USER_ROLE } from "../../gqloperation/query";
 const RoleList = () => {
   const jwt = localStorage.getItem("jwtToken");
 
-  const { loading, error, data: roleList } = useQuery(GET_ALL_USER_ROLE, {
+  const {
+    loading,
+    error,
+    data: roleList,
+  } = useQuery(GET_ALL_USER_ROLE, {
     context: {
       headers: {
         authorization: `Bearer ${jwt}`,
       },
     },
-    fetchPolicy: "network-only"
+    fetchPolicy: "network-only",
   });
 
   if (loading) return <Loading />;
-
-  
 
   return (
     <>
       {roleList &&
         roleList.userRoles.data.map((userRoles) => (
-          <CustomAccordion key={userRoles.id} title={userRoles.attributes.description}>
-            <CustomUserList users={userRoles.attributes.users.data} />
+          <CustomAccordion
+            key={userRoles.id}
+            title={userRoles.attributes.description}
+          >
+            <CustomUserList id="user-roles" users={userRoles.attributes.users.data} />
           </CustomAccordion>
         ))}
-      
     </>
   );
 };

@@ -10,10 +10,10 @@ const CustomUserList = ({ users }) => {
       <nav aria-label="main mailbox folders">
         <List>
           {users &&
-            users.map((t) => (
+            users.map((u) => (
               <CustomListItem
-                key={t.id}
-                description={t.attributes.name}
+                key={u.id}
+                description={u.attributes.name}
                 icon={<PersonIcon />}
               />
             ))}
