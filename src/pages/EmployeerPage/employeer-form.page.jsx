@@ -1,9 +1,4 @@
-<<<<<<< HEAD
 import { FormControl, Grid, InputLabel, MenuItem, Select } from "@mui/material";
-=======
-import { useQuery } from "@apollo/client";
-import { Grid } from "@mui/material";
->>>>>>> cf618bb502da7d6b1200199973c38fc1f0a3652d
 import CustomButton from "../../components/Button/custom-button.component";
 import CustomTextField from "../../components/TextField/custom-text-field.component";
 <<<<<<< HEAD
