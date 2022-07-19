@@ -90,10 +90,12 @@ query PostRoles {
       id
       attributes {
         postRole
+        description
         users {
           data {
             attributes {
               name
+              
             }
             id
           }
@@ -125,3 +127,4 @@ query Query {
   }
 }
 `;
+

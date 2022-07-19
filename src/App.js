@@ -32,9 +32,11 @@ import SystemPage from "./pages/SystemPage/system.page";
 import theme from "./theme";
 import { AuthProvider } from "./contexts/AuthContext";
 import PublicRoute from "./Routes/public.routes";
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 function App() {
   return (
-    <LoginContextProvider>
+   
+    <LoginContextProvider dateAdapter={AdapterDateFns}>
       <AuthProvider>
         <ThemeProvider theme={theme}>
           <CssBaseline />
@@ -100,6 +102,7 @@ function App() {
         </ThemeProvider>
       </AuthProvider>
     </LoginContextProvider>
+    
   );
 }
 
