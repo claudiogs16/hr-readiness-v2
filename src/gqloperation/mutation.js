@@ -36,3 +36,17 @@ export const CREATE_USER = gql`
     }
   }
 `;
+
+export const CREATE_POST_ROLE = gql`
+mutation CreatePostRole($data: PostRoleInput!) {
+  createPostRole(data: $data) {
+    data {
+      id
+      attributes {
+        postRole
+        description
+      }
+    }
+  }
+}
+`;

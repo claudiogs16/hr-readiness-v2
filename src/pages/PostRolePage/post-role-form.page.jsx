@@ -3,6 +3,8 @@ import CustomButton from "../../components/Button/custom-button.component";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useMutation } from "@apollo/client";
+import { CREATE_POST_ROLE } from "../../gqloperation/mutation";
 
 const validationEmailForm = yup
   .object({
@@ -17,8 +19,8 @@ const validationEmailForm = yup
   })
   .required();
 
-
 const PostRoleForm = () => {
+  const jwt = localStorage.getItem("jwtToken");
 
   const {
     register,
@@ -28,16 +30,34 @@ const PostRoleForm = () => {
     resolver: yupResolver(validationEmailForm),
   });
 
+  const [createPostRole, { loading: loadingPostRole, error: errorPostRole }] =
+    useMutation(CREATE_POST_ROLE);
+
   const formPostRole = (dataForm) => {
+    console.log(dataForm);
+    console.log(jwt)
+    createPostRole({
+      variables: {
+        data: {
+          "postRole": dataForm.postRole,
+          "description": dataForm.description,
+        },
+      },
+      context: {
+        headers: {
+          authorization: `Bearer ${jwt}`,
+        },
+      },
+    })
+  };
 
-  }
-
+  if(loadingPostRole) return <h1>Carregando...</h1>
 
   return (
     <form onSubmit={handleSubmit(formPostRole)} noValidate>
-    <Grid container spacing={3}>
-      <Grid item xs={4}>
-      <TextField
+      <Grid container spacing={3}>
+        <Grid item xs={4}>
+          <TextField
             required
             label="Sigla"
             defaultValue=""
@@ -47,9 +67,9 @@ const PostRoleForm = () => {
             {...register("postRole")}
             helperText={errors.postRole?.message}
           />
-      </Grid>
-      <Grid item xs={8}>
-      <TextField
+        </Grid>
+        <Grid item xs={8}>
+          <TextField
             required
             label="Cargo"
             defaultValue=""
@@ -59,12 +79,12 @@ const PostRoleForm = () => {
             {...register("description")}
             helperText={errors.description?.message}
           />
-      </Grid>
+        </Grid>
 
-      <Grid item xs={12}>
-        <CustomButton type="submit" name="Adicionar" />
+        <Grid item xs={12}>
+          <CustomButton type="submit" name="Adicionar" />
+        </Grid>
       </Grid>
-    </Grid>
     </form>
   );
 };
