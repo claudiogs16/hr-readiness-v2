@@ -13,16 +13,26 @@ export const LOGIN_USER = gql`
 `;
 
 export const UPDATE_PASSWORD_USER = gql`
-mutation Mutation(
-  $updateUsersPermissionsUserId: ID!
-  $data: UsersPermissionsUserInput!
-) {
-  updateUsersPermissionsUser(id: $updateUsersPermissionsUserId, data: $data) {
-    data {
-      attributes {
-        email
+  mutation Mutation(
+    $updateUsersPermissionsUserId: ID!
+    $data: UsersPermissionsUserInput!
+  ) {
+    updateUsersPermissionsUser(id: $updateUsersPermissionsUserId, data: $data) {
+      data {
+        attributes {
+          email
+        }
       }
     }
   }
-}
+`;
+
+export const CREATE_USER = gql`
+  mutation CreateUsersPermissionsUser($data: UsersPermissionsUserInput!) {
+    createUsersPermissionsUser(data: $data) {
+      data {
+        id
+      }
+    }
+  }
 `;
