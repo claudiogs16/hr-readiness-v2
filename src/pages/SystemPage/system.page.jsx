@@ -10,6 +10,8 @@ import { useMutation, useQuery } from "@apollo/client";
 import { GET_ALL_SYSTEM_DATA } from "../../gqloperation/query";
 import { UPDATE_SYSTEM_DATA } from "../../gqloperation/mutation";
 import Loading from "../../components/Loading/loading.component";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const validationEmailForm = yup
   .object({
@@ -27,7 +29,15 @@ const validationEmailForm = yup
 const SystemPage = () => {
   const jwt = localStorage.getItem("jwtToken");
 
-  const { loading: loadingGetSystemData, error: errorGetSystemData, data: dataGetSystemData } = useQuery(GET_ALL_SYSTEM_DATA, {
+  const msnSuccess = () =>
+    toast.success("Os dados foram alterados com sucesso!!");
+  const msnError = () => toast.error("Erro ao salvar actualizar dados!!");
+
+  const {
+    loading: loadingGetSystemData,
+    error: errorGetSystemData,
+    data: dataGetSystemData,
+  } = useQuery(GET_ALL_SYSTEM_DATA, {
     context: {
       headers: {
         authorization: `Bearer ${jwt}`,
@@ -56,10 +66,7 @@ const SystemPage = () => {
 
   if (loadingGetSystemData) return <Loading />;
 
-  
-
   const formSystem = ({ company, email }) => {
-
     updateSystemData({
       variables: {
         data: {
@@ -67,9 +74,13 @@ const SystemPage = () => {
           email: email,
         },
       },
-    }).then((d) => {
-      console.log(d);
-    });
+    })
+      .then((d) => {
+        msnSuccess();
+      })
+      .catch((e) => {
+        msnError();
+      });
   };
 
   return (
@@ -104,6 +115,7 @@ const SystemPage = () => {
 
             <Grid item xs={12}>
               <CustomButton type="submit" name="Actualizar" />
+              <ToastContainer />
             </Grid>
           </Grid>
         </MainCard>

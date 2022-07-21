@@ -5,6 +5,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useMutation } from "@apollo/client";
 import { CREATE_POST_ROLE } from "../../gqloperation/mutation";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const validationEmailForm = yup
   .object({
@@ -22,6 +24,10 @@ const validationEmailForm = yup
 const PostRoleForm = () => {
   const jwt = localStorage.getItem("jwtToken");
 
+  const msnSuccess = () =>
+    toast.success("Os dados foram guardados com sucesso!!");
+  const msnError = () => toast.error("Erro ao adicionar cargo!!");
+
   const {
     register,
     handleSubmit,
@@ -34,13 +40,11 @@ const PostRoleForm = () => {
     useMutation(CREATE_POST_ROLE);
 
   const formPostRole = (dataForm) => {
-    console.log(dataForm);
-    console.log(jwt)
     createPostRole({
       variables: {
         data: {
-          "postRole": dataForm.postRole,
-          "description": dataForm.description,
+          postRole: dataForm.postRole,
+          description: dataForm.description,
         },
       },
       context: {
@@ -49,9 +53,15 @@ const PostRoleForm = () => {
         },
       },
     })
+      .then((d) => {
+        msnSuccess();
+      })
+      .catch(() => {
+        msnError();
+      });
   };
 
-  if(loadingPostRole) return <h1>Carregando...</h1>
+  if (loadingPostRole) return <h1>Carregando...</h1>;
 
   return (
     <form onSubmit={handleSubmit(formPostRole)} noValidate>
@@ -83,6 +93,7 @@ const PostRoleForm = () => {
 
         <Grid item xs={12}>
           <CustomButton type="submit" name="Adicionar" />
+          <ToastContainer />
         </Grid>
       </Grid>
     </form>

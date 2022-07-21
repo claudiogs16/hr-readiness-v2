@@ -11,6 +11,8 @@ import { useLazyQuery, useMutation } from "@apollo/client";
 import { USER_BY_EMAIL } from "../../gqloperation/query";
 import { UPDATE_USER_DATA } from "../../gqloperation/mutation";
 import { RESET_PASSWORD } from "../../helpers";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const validationEmailForm = yup
   .object({
@@ -23,6 +25,10 @@ const validationEmailForm = yup
 
 const PasswordResetPage = () => {
   const jwt = localStorage.getItem("jwtToken");
+
+  const msnSuccess = () =>
+    toast.success("Senha foi resetado com sucesso!!");
+  const msnError = () => toast.error("Erro ao resetar a senha!!");
 
   const [
     getUserByEmail,
@@ -75,12 +81,14 @@ const PasswordResetPage = () => {
               authorization: `Bearer ${jwt}`,
             },
           }
+        }).then((d)=>{
+msnSuccess();
         })
       }else{
         console.log("Não foi encontrado")
       }
     }).catch(()=>{
-      console.log("Não foi possivel")
+      msnError();
     });
   };
 
@@ -108,6 +116,7 @@ const PasswordResetPage = () => {
             </Grid>
             <Grid item xs={12}>
               <CustomButton type="email" name="Repor Senha" />
+              <ToastContainer />
             </Grid>
           </Grid>
         </MainCard>
