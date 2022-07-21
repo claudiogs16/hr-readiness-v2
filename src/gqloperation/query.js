@@ -4,6 +4,7 @@ export const USER_BY_EMAIL = gql`
 query UsersPermissionsUsers($filters: UsersPermissionsUserFiltersInput) {
   usersPermissionsUsers(filters: $filters) {
     data {
+      id
       attributes {
         email
         isResetPassword
@@ -122,6 +123,20 @@ query Query {
             }
           }
         }
+      }
+    }
+  }
+}
+`;
+
+export const GET_ALL_SYSTEM_DATA = gql`
+query System {
+  system {
+    data {
+      id
+      attributes {
+        company
+        email
       }
     }
   }

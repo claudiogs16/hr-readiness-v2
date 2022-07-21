@@ -50,3 +50,53 @@ mutation CreatePostRole($data: PostRoleInput!) {
   }
 }
 `;
+
+export const UPDATE_SYSTEM_DATA = gql`
+mutation UpdateSystem($data: SystemInput!) {
+  updateSystem(data: $data) {
+    data {
+      id
+      attributes {
+        company
+        email
+      }
+    }
+  }
+}
+`;
+
+export const UPDATE_USER_DATA = gql`
+mutation UpdateUsersPermissionsUser($updateUsersPermissionsUserId: ID!, $data: UsersPermissionsUserInput!) {
+  updateUsersPermissionsUser(id: $updateUsersPermissionsUserId, data: $data) {
+    data {
+      id
+      attributes {
+        name
+        start_date
+        contact
+        blocked
+        email
+        postRole {
+          data {
+            id
+            attributes {
+              postRole
+              description
+            }
+          }
+        }
+        userRole {
+          data {
+            id
+            attributes {
+              role
+              description
+            }
+          }
+        }
+        isResetPassword
+      }
+    }
+  }
+}
+`;
