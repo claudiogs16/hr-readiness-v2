@@ -192,7 +192,6 @@ const EmployeerForm = () => {
                   </MenuItem>
                 ))}
             </Select>
-            <span>sdfdfsdf</span>
           </FormControl>
         </Grid>
         <Grid item xs={12} sm={6}>

@@ -6,12 +6,10 @@ import MainContainer from "../../components/MainContainer/main-container.compone
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react";
-import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
-import { GET_ALL_SYSTEM_DATA, GET_SYSTEM_DATA } from "../../gqloperation/query";
-import { useEffect } from "react";
+import { useMutation, useQuery } from "@apollo/client";
+import { GET_ALL_SYSTEM_DATA } from "../../gqloperation/query";
 import { UPDATE_SYSTEM_DATA } from "../../gqloperation/mutation";
-import Loading from "../../components/Loading/loading.component"
+import Loading from "../../components/Loading/loading.component";
 
 const validationEmailForm = yup
   .object({
@@ -28,25 +26,14 @@ const validationEmailForm = yup
 
 const SystemPage = () => {
   const jwt = localStorage.getItem("jwtToken");
-  const [company, setCompany] = useState("");
-  const [email, setEmail] = useState("");
 
-  const handleCompanyChange = (e) => {
-    setCompany(e.target.value)
-  }
-
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value)
-  }
-
-  const [getSystemData, { loading: loadingSystem, data: dataSystem }] =
-    useLazyQuery(GET_ALL_SYSTEM_DATA, {
-      context: {
-        headers: {
-          authorization: `Bearer ${jwt}`,
-        },
+  const { loading: loadingGetSystemData, error: errorGetSystemData, data: dataGetSystemData } = useQuery(GET_ALL_SYSTEM_DATA, {
+    context: {
+      headers: {
+        authorization: `Bearer ${jwt}`,
       },
-    });
+    },
+  });
 
   const [
     updateSystemData,
@@ -59,15 +46,6 @@ const SystemPage = () => {
     },
   });
 
-  useEffect(() => {
-    getSystemData().then((d) => {
-      const { company, email } = d.data.system.data.attributes;
-      console.log(email);
-      setCompany(company);
-      setEmail(email);
-    });
-  }, []);
-
   const {
     register,
     handleSubmit,
@@ -76,24 +54,22 @@ const SystemPage = () => {
     resolver: yupResolver(validationEmailForm),
   });
 
-  if (loadingSystem) return <Loading />
+  if (loadingGetSystemData) return <Loading />;
 
-  // if (dataSystem) console.log(dataSystem.system.data.attributes);
+  
 
-  const formSystem = ({company,email}) => {
-    console.log(company);
+  const formSystem = ({ company, email }) => {
 
     updateSystemData({
       variables: {
         data: {
-          "company": company,
-          "email": email
-        }
-      }
-    }).then(d=> {
-      console.log(d)
-    })
-    
+          company: company,
+          email: email,
+        },
+      },
+    }).then((d) => {
+      console.log(d);
+    });
   };
 
   return (
@@ -105,7 +81,7 @@ const SystemPage = () => {
               <TextField
                 required
                 label="Empresa"
-                defaultValue={company && company}
+                defaultValue={dataGetSystemData.system.data.attributes.company}
                 fullWidth
                 type="text"
                 name="company"
@@ -117,8 +93,7 @@ const SystemPage = () => {
               <TextField
                 required
                 label="Email"
-                value={email}
-               
+                defaultValue={dataGetSystemData.system.data.attributes.email}
                 fullWidth
                 type="email"
                 name="email"
