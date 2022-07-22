@@ -54,6 +54,8 @@ const PostRoleForm = () => {
       },
     })
       .then((d) => {
+        document.getElementById("postRole").value = "";
+        document.getElementById("description").value = "";
         msnSuccess();
       })
       .catch(() => {
@@ -68,6 +70,7 @@ const PostRoleForm = () => {
       <Grid container spacing={3}>
         <Grid item xs={4}>
           <TextField
+            id="postRole"
             required
             label="Sigla"
             defaultValue=""
@@ -80,6 +83,7 @@ const PostRoleForm = () => {
         </Grid>
         <Grid item xs={8}>
           <TextField
+            id="description"
             required
             label="Cargo"
             defaultValue=""
