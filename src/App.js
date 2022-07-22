@@ -34,8 +34,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 import PublicRoute from "./Routes/public.routes";
 function App() {
   return (
-   
-    <LoginContextProvider >
+    <LoginContextProvider>
       <AuthProvider>
         <ThemeProvider theme={theme}>
           <CssBaseline />
@@ -101,7 +100,6 @@ function App() {
         </ThemeProvider>
       </AuthProvider>
     </LoginContextProvider>
-    
   );
 }
 

@@ -38,65 +38,93 @@ export const CREATE_USER = gql`
 `;
 
 export const CREATE_POST_ROLE = gql`
-mutation CreatePostRole($data: PostRoleInput!) {
-  createPostRole(data: $data) {
-    data {
-      id
-      attributes {
-        postRole
-        description
+  mutation CreatePostRole($data: PostRoleInput!) {
+    createPostRole(data: $data) {
+      data {
+        id
+        attributes {
+          postRole
+          description
+        }
       }
     }
   }
-}
 `;
 
 export const UPDATE_SYSTEM_DATA = gql`
-mutation UpdateSystem($data: SystemInput!) {
-  updateSystem(data: $data) {
-    data {
-      id
-      attributes {
-        company
-        email
+  mutation UpdateSystem($data: SystemInput!) {
+    updateSystem(data: $data) {
+      data {
+        id
+        attributes {
+          company
+          email
+        }
       }
     }
   }
-}
 `;
 
 export const UPDATE_USER_DATA = gql`
-mutation UpdateUsersPermissionsUser($updateUsersPermissionsUserId: ID!, $data: UsersPermissionsUserInput!) {
-  updateUsersPermissionsUser(id: $updateUsersPermissionsUserId, data: $data) {
-    data {
-      id
-      attributes {
-        name
-        start_date
-        contact
-        blocked
-        email
-        postRole {
-          data {
-            id
-            attributes {
-              postRole
-              description
+  mutation UpdateUsersPermissionsUser(
+    $updateUsersPermissionsUserId: ID!
+    $data: UsersPermissionsUserInput!
+  ) {
+    updateUsersPermissionsUser(id: $updateUsersPermissionsUserId, data: $data) {
+      data {
+        id
+        attributes {
+          name
+          start_date
+          contact
+          blocked
+          email
+          postRole {
+            data {
+              id
+              attributes {
+                postRole
+                description
+              }
             }
           }
-        }
-        userRole {
-          data {
-            id
-            attributes {
-              role
-              description
+          userRole {
+            data {
+              id
+              attributes {
+                role
+                description
+              }
             }
           }
+          isResetPassword
         }
-        isResetPassword
       }
     }
   }
-}
 `;
+
+export const CREATE_DIMENSION = gql`
+  mutation CreateDimension($data: DimensionInput!) {
+    createDimension(data: $data) {
+      data {
+        id
+        attributes {
+          dimension
+          postRoles {
+            data {
+              id
+              attributes {
+                postRole
+                description
+              }
+            }
+          }
+          isActive
+        }
+      }
+    }
+  }
+`;
+
+
