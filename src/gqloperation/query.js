@@ -155,3 +155,18 @@ query PostRoles($filters: PostRoleFiltersInput) {
   }
 }
 `;
+
+
+export const GET_ALL_DIMENSIOS = gql`
+query Dimensions {
+  dimensions {
+    data {
+      id
+      attributes {
+        dimension
+        isActive
+      }
+    }
+  }
+}
+`;

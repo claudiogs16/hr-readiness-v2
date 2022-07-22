@@ -140,6 +140,8 @@ const DimensionForm = () => {
         },
       })
         .then((r) => {
+          document.getElementById("dimension").value = "";
+          setPersonName([])
           msnSuccess();
         })
         .catch((e) => {

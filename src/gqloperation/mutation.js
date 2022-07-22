@@ -127,4 +127,17 @@ export const CREATE_DIMENSION = gql`
   }
 `;
 
+export const CREATE_INDICATOR = gql`
+mutation CreateIndicator($data: IndicatorInput!) {
+  createIndicator(data: $data) {
+    data {
+      id
+      attributes {
+        indicator
+      }
+    }
+  }
+}
+`;
+
 
