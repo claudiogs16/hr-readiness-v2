@@ -140,4 +140,18 @@ mutation CreateIndicator($data: IndicatorInput!) {
 }
 `;
 
+export const CREATE_QUESTION = gql`
+mutation CreateQuestion($data: QuestionInput!) {
+  createQuestion(data: $data) {
+    data {
+      id
+      attributes {
+        question
+        isActive
+      }
+    }
+  }
+}
+`;
+
 

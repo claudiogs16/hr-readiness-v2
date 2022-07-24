@@ -165,6 +165,29 @@ query Dimensions {
       attributes {
         dimension
         isActive
+        indicators {
+          data {
+            id
+            attributes {
+              indicator
+              isActive
+            }
+          }
+        }
+      }
+    }
+  }
+}
+`;
+
+export const GET_ALL_INDICATOR = gql`
+query Indicators($filters: IndicatorFiltersInput) {
+  indicators(filters: $filters) {
+    data {
+      id
+      attributes {
+        indicator
+        isActive
       }
     }
   }
