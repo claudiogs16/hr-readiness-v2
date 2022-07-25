@@ -196,4 +196,18 @@ mutation UpdateQuestion($updateQuestionId: ID!, $data: QuestionInput!) {
 }
 `;
 
+export const UPDATE_POST_ROLE = gql`
+mutation Mutation($updatePostRoleId: ID!, $data: PostRoleInput!) {
+  updatePostRole(id: $updatePostRoleId, data: $data) {
+    data {
+      id
+      attributes {
+        postRole
+        description
+      }
+    }
+  }
+}
+`;
+
 

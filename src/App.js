@@ -35,6 +35,7 @@ import PublicRoute from "./Routes/public.routes";
 import DimensionFormEdit from "./pages/DimensionPage/dimension-form-edit.page";
 import IndicatorFormEdit from "./pages/IndicatorPage/indicator-form-edit";
 import QuestionFormEdit from "./pages/QuestionPage/question-form-edit";
+import PostRoleFormEdit from "./pages/PostRolePage/post-role-form-edit.page";
 
 document.title= "HR-Readiness";
 
@@ -68,6 +69,7 @@ function App() {
                   <Route path="definition/post-role" element={<PostRolePage />}>
                     <Route index element={<PostRoleList />} />
                     <Route path="new" element={<PostRoleForm />} />
+                    <Route path="edit/:postRoleID" element={<PostRoleFormEdit />} />
                   </Route>
                   <Route
                     path="definition/dimension"
