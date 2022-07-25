@@ -32,6 +32,10 @@ import SystemPage from "./pages/SystemPage/system.page";
 import theme from "./theme";
 import { AuthProvider } from "./contexts/AuthContext";
 import PublicRoute from "./Routes/public.routes";
+import DimensionFormEdit from "./pages/DimensionPage/dimension-form-edit.page";
+
+document.title= "HR-Readiness";
+
 function App() {
   return (
     <LoginContextProvider>
@@ -69,6 +73,7 @@ function App() {
                   >
                     <Route index element={<DimensionList />} />
                     <Route path="new" element={<DimensionForm />} />
+                    <Route path="edit/:dimensionID" element={<DimensionFormEdit />} />
                   </Route>
                   <Route
                     path="definition/indicator"

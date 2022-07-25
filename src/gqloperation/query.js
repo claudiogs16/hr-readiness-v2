@@ -174,6 +174,15 @@ query Dimensions {
             }
           }
         }
+        postRoles{
+          data{
+            id
+            attributes{
+              postRole
+              description
+            }
+          }
+        }
       }
     }
   }
@@ -188,6 +197,38 @@ query Indicators($filters: IndicatorFiltersInput) {
       attributes {
         indicator
         isActive
+      }
+    }
+  }
+}
+`;
+
+export const GET_DIMENSION_BY_ID = gql`
+query Data($filters: DimensionFiltersInput) {
+  dimensions(filters: $filters) {
+    data {
+      id
+      attributes {
+        dimension
+        isActive
+        indicators {
+          data {
+            id
+            attributes {
+              indicator
+              isActive
+            }
+          }
+        }
+        postRoles {
+          data {
+            id
+            attributes {
+              postRole
+              description
+            }
+          }
+        }
       }
     }
   }

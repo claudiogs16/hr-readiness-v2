@@ -154,4 +154,18 @@ mutation CreateQuestion($data: QuestionInput!) {
 }
 `;
 
+export const UPDATE_DIMENSION = gql`
+mutation UpdateDimension($updateDimensionId: ID!, $data: DimensionInput!) {
+  updateDimension(id: $updateDimensionId, data: $data) {
+    data {
+      id
+      attributes {
+        dimension
+        isActive
+      }
+    }
+  }
+}
+`;
+
 
