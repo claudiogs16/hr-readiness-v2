@@ -60,6 +60,7 @@ export const GET_ALL_USER_DATA_BY_ID = gql`
           contact
           name
           start_date
+          blocked
           userRole {
             data {
               id

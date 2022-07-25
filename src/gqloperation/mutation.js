@@ -211,3 +211,16 @@ mutation Mutation($updatePostRoleId: ID!, $data: PostRoleInput!) {
 `;
 
 
+export const UPDATE_EMPLOYEER_BY_ID=gql`
+mutation UpdateUsersPermissionsUser($updateUsersPermissionsUserId: ID!, $data: UsersPermissionsUserInput!) {
+  updateUsersPermissionsUser(id: $updateUsersPermissionsUserId, data: $data) {
+    data {
+      id
+      attributes {
+        name
+      }
+    }
+  }
+}
+`;
+

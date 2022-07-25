@@ -36,6 +36,7 @@ import DimensionFormEdit from "./pages/DimensionPage/dimension-form-edit.page";
 import IndicatorFormEdit from "./pages/IndicatorPage/indicator-form-edit";
 import QuestionFormEdit from "./pages/QuestionPage/question-form-edit";
 import PostRoleFormEdit from "./pages/PostRolePage/post-role-form-edit.page";
+import EmployeerFormEdit from "./pages/EmployeerPage/employeer-form-edit";
 
 document.title= "HR-Readiness";
 
@@ -62,6 +63,7 @@ function App() {
                   >
                     <Route index element={<EmployeerList />} />
                     <Route path="new" element={<EmployeerForm />} />
+                    <Route path="edit/:employeerID" element={<EmployeerFormEdit />} />
                   </Route>
                   <Route path="definition/role" element={<RolePage />}>
                     <Route index element={<RoleList />} />
