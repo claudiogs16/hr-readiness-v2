@@ -125,6 +125,7 @@ const IndicatorForm = () => {
             label="Indicador"
             defaultValue=""
             fullWidth
+            multiline
             type="text"
             name="indicator"
             {...register("indicator")}

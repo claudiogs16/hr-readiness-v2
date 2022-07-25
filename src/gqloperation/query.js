@@ -234,3 +234,40 @@ query Data($filters: DimensionFiltersInput) {
   }
 }
 `;
+
+export const GET_INDICATOR_BY_ID = gql`
+query Indicators($filters: IndicatorFiltersInput) {
+  indicators(filters: $filters) {
+    data {
+      id
+      attributes {
+        indicator
+        isActive
+        dimension {
+          data {
+            id
+            attributes {
+              dimension
+              isActive
+            }
+          }
+        }
+      }
+    }
+  }
+}
+`;
+
+export const GET_QUESTION_BY_ID = gql`
+query Questions($filters: QuestionFiltersInput) {
+  questions(filters: $filters) {
+    data {
+      id
+      attributes {
+        question
+        isActive
+      }
+    }
+  }
+}
+`;

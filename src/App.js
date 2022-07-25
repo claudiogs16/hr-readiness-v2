@@ -33,6 +33,8 @@ import theme from "./theme";
 import { AuthProvider } from "./contexts/AuthContext";
 import PublicRoute from "./Routes/public.routes";
 import DimensionFormEdit from "./pages/DimensionPage/dimension-form-edit.page";
+import IndicatorFormEdit from "./pages/IndicatorPage/indicator-form-edit";
+import QuestionFormEdit from "./pages/QuestionPage/question-form-edit";
 
 document.title= "HR-Readiness";
 
@@ -81,10 +83,12 @@ function App() {
                   >
                     <Route index element={<IndicatorList />} />
                     <Route path="new" element={<IndicatorForm />} />
+                    <Route path="edit/:indicatorID" element={<IndicatorFormEdit />} />
                   </Route>
                   <Route path="definition/question" element={<QuestionPage />}>
                     <Route index element={<QuestionList />} />
                     <Route path="new" element={<QuestionForm />} />
+                    <Route path="edit/:questionID" element={<QuestionFormEdit />} />
                   </Route>
                   <Route
                     path="/password-change"

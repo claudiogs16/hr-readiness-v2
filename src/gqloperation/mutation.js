@@ -168,4 +168,32 @@ mutation UpdateDimension($updateDimensionId: ID!, $data: DimensionInput!) {
 }
 `;
 
+export const UPDATE_INDICATOR = gql`
+mutation UpdateIndicator($updateIndicatorId: ID!, $data: IndicatorInput!) {
+  updateIndicator(id: $updateIndicatorId, data: $data) {
+    data {
+      id
+      attributes {
+        indicator
+        isActive
+      }
+    }
+  }
+}
+`;
+
+export const UPDATE_QUESTION = gql`
+mutation UpdateQuestion($updateQuestionId: ID!, $data: QuestionInput!) {
+  updateQuestion(id: $updateQuestionId, data: $data) {
+    data {
+      id
+      attributes {
+        question
+        isActive
+      }
+    }
+  }
+}
+`;
+
 
