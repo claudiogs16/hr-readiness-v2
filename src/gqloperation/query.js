@@ -273,3 +273,17 @@ query Questions($filters: QuestionFiltersInput) {
 }
 `;
 
+export const GET_ANSWER_BY_ID_AND_INDICATOR = gql`
+query Answers($filters: AnswerFiltersInput) {
+  answers(filters: $filters) {
+    data {
+      id
+      attributes {
+        rate
+        answer
+      }
+    }
+  }
+}
+`;
+

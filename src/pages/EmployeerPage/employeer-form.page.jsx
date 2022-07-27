@@ -169,7 +169,7 @@ const EmployeerForm = () => {
             type="date"
             value={startDate}
             onChange={handleStartDateChange}
-            name="dategdfgfd"
+            name="start_date"
             InputLabelProps={{
               shrink: true,
             }}

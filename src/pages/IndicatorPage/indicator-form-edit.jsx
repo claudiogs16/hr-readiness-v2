@@ -1,12 +1,14 @@
 import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
+  Button,
   FormControl,
   Grid,
   InputLabel,
   MenuItem,
   Select,
   TextField,
+  Tooltip,
 } from "@mui/material";
 import CustomButton from "../../components/Button/custom-button.component";
 import CustomSelect from "../../components/Select/custom-select.component";
@@ -23,7 +25,7 @@ import {
 } from "../../gqloperation/mutation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const validationEmailForm = yup
   .object({
@@ -35,6 +37,7 @@ const validationEmailForm = yup
   .required();
 
 const IndicatorFormEdit = () => {
+  let navigate = useNavigate();
   const jwt = localStorage.getItem("jwtToken");
   const [status, setStatus] = useState(false);
   const [indicator, setIndicator] = useState("");
@@ -47,7 +50,6 @@ const IndicatorFormEdit = () => {
   const [getIndicator] = useLazyQuery(GET_INDICATOR_BY_ID);
 
   const [updateIndicator] = useMutation(UPDATE_INDICATOR);
-  
 
   const {
     register,
@@ -109,6 +111,13 @@ const IndicatorFormEdit = () => {
   return (
     <form onSubmit={handleSubmit(formIndicator)} noValidate>
       <Grid container spacing={3}>
+        <Grid item xs={12} style={{ textAlign: "right" }}>
+          <Tooltip placement="right" title="Pontuações">
+            <Button onClick={()=>navigate('rating/'+indicatorID)} variant="contained" size="small">
+              Rating
+            </Button>
+          </Tooltip>
+        </Grid>
         <Grid item xs={12}>
           <TextField
             id="indicator"
@@ -117,6 +126,7 @@ const IndicatorFormEdit = () => {
             defaultValue={indicator}
             fullWidth
             multiline
+            rows={2}
             InputLabelProps={{
               shrink: true,
             }}

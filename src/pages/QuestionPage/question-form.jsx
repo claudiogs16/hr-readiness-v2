@@ -169,6 +169,8 @@ const QuestionForm = () => {
             required
             label="Questão"
             defaultValue=""
+            multiline
+            rows={2}
             fullWidth
             type="text"
             name="question"

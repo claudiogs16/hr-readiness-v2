@@ -224,3 +224,31 @@ mutation UpdateUsersPermissionsUser($updateUsersPermissionsUserId: ID!, $data: U
 }
 `;
 
+export const CREATE_ANSWER = gql`
+mutation CreateAnswer($data: AnswerInput!) {
+  createAnswer(data: $data) {
+    data {
+      id
+      attributes {
+        rate
+        answer
+      }
+    }
+  }
+}
+`;
+
+export const UPDATE_ANSWER = gql`
+mutation UpdateAnswer($updateAnswerId: ID!, $data: AnswerInput!) {
+  updateAnswer(id: $updateAnswerId, data: $data) {
+    data {
+      id
+      attributes {
+        rate
+        answer
+      }
+    }
+  }
+}
+`;
+

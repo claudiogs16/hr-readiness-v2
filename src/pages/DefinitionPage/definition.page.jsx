@@ -24,6 +24,7 @@ const DefinitionPage = () => {
                   bgcolor="#FAE8E8"
                   btnName="Avaliações"
                   icon={<StarHalfIcon fontSize="large" />}
+                  url="/definition/rating"
                 />
               </Grid>
               <Grid item xs={12} sm={6} md={4}></Grid>

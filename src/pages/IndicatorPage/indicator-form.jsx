@@ -126,6 +126,7 @@ const IndicatorForm = () => {
             defaultValue=""
             fullWidth
             multiline
+            rows={2}
             type="text"
             name="indicator"
             {...register("indicator")}

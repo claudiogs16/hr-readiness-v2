@@ -1,15 +1,11 @@
 import { Grid } from "@mui/material";
-import AddButton from "../../components/Button/add-buttom.component";
-import MenuCard from "../../components/MenuCard/menu-card.component";
 import { useNavigate } from "react-router-dom";
-import CustomSelect from "../../components/Select/custom-select.component";
+import AddButton from "../../components/Button/add-buttom.component";
 import CustomList from "../../components/List/custom-list.component";
+import MenuCard from "../../components/MenuCard/menu-card.component";
 import InputSearch from "../../components/TextField/input-search.component";
 
-
-
-
-const IndicatorList = () => {
+const RatingList = () => {
   let navigate = useNavigate();
   return (
     <>
@@ -17,10 +13,7 @@ const IndicatorList = () => {
         itemLeft={<InputSearch />}
         itemRight={<AddButton onClick={() => navigate("new")} />}
       />
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <CustomSelect label="Dimensão" />
-        </Grid>
+      <Grid container>
         <Grid item xs={12}>
           <CustomList />
         </Grid>
@@ -29,4 +22,4 @@ const IndicatorList = () => {
   );
 };
 
-export default IndicatorList;
+export default RatingList;

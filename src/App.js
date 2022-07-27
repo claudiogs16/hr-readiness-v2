@@ -37,8 +37,12 @@ import IndicatorFormEdit from "./pages/IndicatorPage/indicator-form-edit";
 import QuestionFormEdit from "./pages/QuestionPage/question-form-edit";
 import PostRoleFormEdit from "./pages/PostRolePage/post-role-form-edit.page";
 import EmployeerFormEdit from "./pages/EmployeerPage/employeer-form-edit";
+import IndicatorRating from "./pages/IndicatorPage/indicator-rating";
+import RatingPage from "./pages/RatingPage/rating.page";
+import RatingList from "./pages/RatingPage/rating-list";
+import RatingForm from "./pages/RatingPage/rating-form";
 
-document.title= "HR-Readiness";
+document.title = "HR-Readiness";
 
 function App() {
   return (
@@ -63,7 +67,10 @@ function App() {
                   >
                     <Route index element={<EmployeerList />} />
                     <Route path="new" element={<EmployeerForm />} />
-                    <Route path="edit/:employeerID" element={<EmployeerFormEdit />} />
+                    <Route
+                      path="edit/:employeerID"
+                      element={<EmployeerFormEdit />}
+                    />
                   </Route>
                   <Route path="definition/role" element={<RolePage />}>
                     <Route index element={<RoleList />} />
@@ -71,7 +78,14 @@ function App() {
                   <Route path="definition/post-role" element={<PostRolePage />}>
                     <Route index element={<PostRoleList />} />
                     <Route path="new" element={<PostRoleForm />} />
-                    <Route path="edit/:postRoleID" element={<PostRoleFormEdit />} />
+                    <Route
+                      path="edit/:postRoleID"
+                      element={<PostRoleFormEdit />}
+                    />
+                  </Route>
+                  <Route path="definition/rating" element={<RatingPage />}>
+                    <Route index element={<RatingList />} />
+                    <Route path="new" element={<RatingForm />} />
                   </Route>
                   <Route
                     path="definition/dimension"
@@ -79,7 +93,10 @@ function App() {
                   >
                     <Route index element={<DimensionList />} />
                     <Route path="new" element={<DimensionForm />} />
-                    <Route path="edit/:dimensionID" element={<DimensionFormEdit />} />
+                    <Route
+                      path="edit/:dimensionID"
+                      element={<DimensionFormEdit />}
+                    />
                   </Route>
                   <Route
                     path="definition/indicator"
@@ -87,12 +104,22 @@ function App() {
                   >
                     <Route index element={<IndicatorList />} />
                     <Route path="new" element={<IndicatorForm />} />
-                    <Route path="edit/:indicatorID" element={<IndicatorFormEdit />} />
+                    <Route
+                      path="edit/:indicatorID"
+                      element={<IndicatorFormEdit />}
+                    />
+                    <Route
+                      path="edit/:indicatorID/rating/:indicatorID"
+                      element={<IndicatorRating />}
+                    />
                   </Route>
                   <Route path="definition/question" element={<QuestionPage />}>
                     <Route index element={<QuestionList />} />
                     <Route path="new" element={<QuestionForm />} />
-                    <Route path="edit/:questionID" element={<QuestionFormEdit />} />
+                    <Route
+                      path="edit/:questionID"
+                      element={<QuestionFormEdit />}
+                    />
                   </Route>
                   <Route
                     path="/password-change"
