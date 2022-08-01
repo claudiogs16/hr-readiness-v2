@@ -43,6 +43,9 @@ import RatingList from "./pages/RatingPage/rating-list";
 import RatingForm from "./pages/RatingPage/rating-form";
 import ProfilePage from "./pages/ProfilePage/profile.page";
 import ReviewPage from "./pages/ReviewPage/review.page";
+import EvaluationAllList from "./pages/EvaluationListPage/evaluation-all-list";
+import EvaluationPerfomedList from "./pages/EvaluationListPage/evaluation-perfomed-list";
+import EvaluationPendingList from "./pages/EvaluationListPage/evaluation-pending-list";
 
 document.title = "HR-Readiness";
 
@@ -57,6 +60,18 @@ function App() {
               <Route element={<PrivateRoute />}>
                 <Route path="/" element={<TopBar />}>
                   <Route index element={<HomePage />} />
+                  <Route
+                    path="evaluation/all/list"
+                    element={<EvaluationAllList />}
+                  />
+                  <Route
+                    path="evaluation/perfomed/list"
+                    element={<EvaluationPerfomedList />}
+                  />
+                  <Route
+                    path="evaluation/pending/list"
+                    element={<EvaluationPendingList />}
+                  />
                   <Route path="definition" element={<DefinitionPage />} />
                   <Route
                     path="definition/password-reset"

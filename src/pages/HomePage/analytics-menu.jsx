@@ -5,6 +5,8 @@ import { useLazyQuery, useQuery } from "@apollo/client";
 import { useEffect, useRef, useState } from "react";
 import { GET_ME } from "../../gqloperation/query";
 
+import { useNavigate } from "react-router-dom";
+
 const AnalyticsMenu = () => {
   const jwt = localStorage.getItem("jwtToken");
   const [analyticsTotal, setAnalyticsTotal] = useState(0);
@@ -43,28 +45,23 @@ const AnalyticsMenu = () => {
           },
         },
         fetchPolicy: "network-only",
-      }).then((evaluators) => {
-        
-        setAnalyticsTotal(evaluators.data.evaluators.data.length)
+      })
+        .then((evaluators) => {
+          setAnalyticsTotal(evaluators.data.evaluators.data.length);
 
-        if (analyticsTotal !== 0) {
-          evaluators.data.evaluators.data.map((evaluator) => {
-            if (evaluator.attributes.ratings.data.length)
-              setAnalyticsPerfomed(analyticsPerfomed + 1)
-          });
-
-          
-        }
-        setLoading(false);
-      }).then(d=>{
-        setAnalyticsPending(analyticsTotal - analyticsPerfomed)
-      });
+          if (analyticsTotal !== 0) {
+            evaluators.data.evaluators.data.map((evaluator) => {
+              if (evaluator.attributes.ratings.data.length)
+                setAnalyticsPerfomed(analyticsPerfomed + 1);
+            });
+          }
+          setLoading(false);
+        })
+        .then((d) => {
+          setAnalyticsPending(analyticsTotal - analyticsPerfomed);
+        });
     });
   }, []);
-
- 
-
-  
 
   if (loading) return <></>;
 
@@ -75,6 +72,7 @@ const AnalyticsMenu = () => {
           btnName="Avaliações"
           count={analyticsTotal}
           bgcolor="#F9FAFE"
+          url="evaluation/all/list"
         />
       </Grid>
       <Grid item xs={12} md={4}>
