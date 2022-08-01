@@ -19,6 +19,7 @@ import { useEffect } from "react";
 import { CREATE_DIMENSION } from "../../gqloperation/mutation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Loading from '../../components/Loading/loading.component'
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -151,6 +152,8 @@ const DimensionForm = () => {
       msnError();
     });
   };
+
+  if(loadingGetAllPostRole) return <Loading />
 
   return (
     <form onSubmit={handleSubmit(formDimension)} noValidate>

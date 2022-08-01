@@ -252,3 +252,39 @@ mutation UpdateAnswer($updateAnswerId: ID!, $data: AnswerInput!) {
 }
 `;
 
+export const CREATE_PERIOD = gql`
+mutation CreatePeriod($data: PeriodInput!) {
+  createPeriod(data: $data) {
+    data {
+      id
+    }
+  }
+}
+`;
+
+export const CREATE_EVALUATOR = gql`
+mutation Mutation($data: EvaluatorInput!) {
+  createEvaluator(data: $data) {
+    data {
+      id
+      attributes {
+        periods {
+          data {
+            id
+          }
+        }
+      }
+    }
+  }
+}
+`;
+
+export const CREATE_RATING = gql`
+mutation CreateRating($data: RatingInput!) {
+  createRating(data: $data) {
+    data {
+      id
+    }
+  }
+}
+`;

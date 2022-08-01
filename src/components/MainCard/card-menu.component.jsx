@@ -13,14 +13,24 @@ const CardMenu = ({ bgcolor, count, btnName, icon, url }) => {
         height: "120px",
       }}
     >
-      <CardContent style={{textAlign: 'center'}}>
-        {icon && <div style={{display: 'block'}}>{icon}</div>}
+      <CardContent style={{ textAlign: "center" }}>
+        {icon && <div style={{ display: "block" }}>{icon}</div>}
         {count && (
-          <Typography variant="h6" style={{ fontWeight: "bold", opacity: 0.6 }}>
+          <Typography
+            variant="h6"
+            style={{ fontWeight: "bold", opacity: 0.6}}
+          >
             {count}
           </Typography>
         )}
-        <Button variant="text" size="small" fullWidth onClick={() => navigate(url)}>{btnName}</Button>
+        <Button
+          variant="text"
+          size="small"
+          fullWidth
+          onClick={() => navigate(url)}
+        >
+          {btnName}
+        </Button>
       </CardContent>
     </Card>
   );

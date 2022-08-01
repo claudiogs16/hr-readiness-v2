@@ -122,6 +122,8 @@ const QuestionForm = () => {
     });
   };
 
+  if(dataGetAllDimensions) console.log(dataGetAllDimensions.dimensions.data[0].attributes.indicators.data.length)
+
   return (
     <form onSubmit={handleSubmit(formQuestion)} noValidate>
       <Grid container spacing={3}>
@@ -137,6 +139,7 @@ const QuestionForm = () => {
             >
               {dataGetAllDimensions &&
                 dataGetAllDimensions.dimensions.data.map((d) => (
+                  d.attributes.indicators.data.length &&
                   <MenuItem key={d.id} value={d.id}>
                     {d.attributes.dimension}
                   </MenuItem>

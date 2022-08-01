@@ -41,6 +41,8 @@ import IndicatorRating from "./pages/IndicatorPage/indicator-rating";
 import RatingPage from "./pages/RatingPage/rating.page";
 import RatingList from "./pages/RatingPage/rating-list";
 import RatingForm from "./pages/RatingPage/rating-form";
+import ProfilePage from "./pages/ProfilePage/profile.page";
+import ReviewPage from "./pages/ReviewPage/review.page";
 
 document.title = "HR-Readiness";
 
@@ -125,6 +127,8 @@ function App() {
                     path="/password-change"
                     element={<PasswordChangePage />}
                   />
+                  <Route path="/profile" element={<ProfilePage />} />
+                  <Route path="/review" element={<ReviewPage />} />
                 </Route>
               </Route>
               <Route element={<PublicRoute />}>

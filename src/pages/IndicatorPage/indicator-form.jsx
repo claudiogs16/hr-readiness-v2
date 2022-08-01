@@ -17,6 +17,7 @@ import { useForm } from "react-hook-form";
 import { CREATE_INDICATOR } from "../../gqloperation/mutation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Loading from '../../components/Loading/loading.component'
 
 const validationEmailForm = yup
   .object({
@@ -95,6 +96,8 @@ const IndicatorForm = () => {
         msnError();
       });
   };
+
+  if(loadingGetAllDimension) return <Loading />
 
   return (
     <form onSubmit={handleSubmit(formIndicator)} noValidate>

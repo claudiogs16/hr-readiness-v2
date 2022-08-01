@@ -10,6 +10,7 @@ const ProfileMenu = () => {
         variant="contained"
         size="small"
         style={{ borderRadius: "15px" }}
+        onClick={() => navigate("/profile")}
       >
         Perfil
       </Button>

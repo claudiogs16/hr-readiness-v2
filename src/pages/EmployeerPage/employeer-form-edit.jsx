@@ -231,7 +231,7 @@ const msnError = () => toast.error("Erro ao actualizar funcionário!!");
               startDate
             }
             onChange={handleStartDateChange}
-            name="dategdfgfd"
+            name=""
             InputLabelProps={{
               shrink: true,
             }}

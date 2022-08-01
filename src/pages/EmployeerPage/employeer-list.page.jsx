@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { Grid } from "@mui/material";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AddButton from "../../components/Button/add-buttom.component";
 import CustomList from "../../components/List/custom-list.component";
@@ -12,7 +13,8 @@ import { GET_ALL_USERS } from "../../gqloperation/query";
 const EmployeerList = () => {
   let navigate = useNavigate();
   const jwt = localStorage.getItem("jwtToken");
-
+  const [search, setSearch] = useState("")
+ 
   const { loading, error, data: employeerList } = useQuery(GET_ALL_USERS, {
     context: {
       headers: {
@@ -22,16 +24,25 @@ const EmployeerList = () => {
     fetchPolicy: "network-only"
   });
 
+  const handleChangeSearch = e => {
+    setSearch(e.target.value)
+  }
+
+  
+
+
   if (loading) return <Loading />;
+
+
   return (
     <>
       <MenuCard
-        itemLeft={<InputSearch />}
+        itemLeft={<InputSearch handleChangeSearch={handleChangeSearch} search={search} />}
         itemRight={<AddButton onClick={() => navigate("new")} />}
       />
       <Grid container>
         <Grid item xs={12}>
-          {employeerList && <CustomUserList id="employeer" users={employeerList.usersPermissionsUsers.data} />}
+          {employeerList && <CustomUserList search={search} id="employeer" users={employeerList.usersPermissionsUsers.data} />}
         </Grid>
       </Grid>
     </>
