@@ -57,7 +57,7 @@ const AnalyticsHistory = () => {
           }
         }
 
-        console.log(refPeriodsArray.current);
+        // console.log(refPeriodsArray.current);
         setLoading(false);
       });
     });

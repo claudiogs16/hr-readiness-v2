@@ -45,7 +45,7 @@ const HomePage = () => {
             action={<ProfileMenu />}
           />
           <MainCard title="Gráfico" subtitle="Ultima Avaliação">
-            <DripChart />
+            <DripChart periodID={135} />
           </MainCard>
         </Grid>
         <Grid item xs={12} md={6}>
