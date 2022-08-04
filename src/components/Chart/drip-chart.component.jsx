@@ -81,26 +81,24 @@ useEffect(()=>{
     getDimension({
       variables: {
         
-          "filters": {
-            "postRoles": {
-              "id": {
-                "eq": refPeriodData.current.postRoleID
-              },
-              "dimension": {
-                "indicators": {
-                  "questions": {
-                    "ratings": {
-                      "evaluator": {
-                        "id": {
-                          "eq": refPeriodData.current.evaluatorID
-                        }
-                      }
+        "filters": {
+          "id": {
+            "eq": refPeriodData.current.postRoleID
+          },
+          "dimension": {
+            "indicators": {
+              "answers": {
+                "ratings": {
+                  "evaluator": {
+                    "id": {
+                      "eq": refPeriodData.current.evaluatorID
                     }
                   }
                 }
               }
             }
           }
+        }
         
       },
       context: {
@@ -109,6 +107,8 @@ useEffect(()=>{
         },
       },
       fetchPolicy: "network-only",
+    }).then(d => {
+      console.log(d)
     })
     
   })
@@ -126,6 +126,7 @@ console.log(periodID)
         <PolarRadiusAxis angle={30} domain={[0, 150]} />
         <Radar key={1} name="CEO" dataKey="B" stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.6} />
         <Radar key={2} name="R.H" dataKey="A" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
+        <Radar key={2} name="Teste" dataKey="C" stroke="#8784d8" fill="#8884d8" fillOpacity={0.6} />
         <Legend />
       </RadarChart>
     </ResponsiveContainer>
@@ -163,45 +164,32 @@ query Periods($filters: PeriodFiltersInput) {
 `;
 
 const GET_DIMENSIONS_BY_EVALUATOR = gql`
-query Data($filters: DimensionFiltersInput) {
-  dimensions(filters: $filters) {
+query PostRoles($filters: PostRoleFiltersInput) {
+  postRoles(filters: $filters) {
     data {
       id
       attributes {
-        indicators {
+        postRole
+        dimension {
           data {
             id
             attributes {
-              questions {
+              dimension
+              indicators {
                 data {
                   id
                   attributes {
-                    ratings {
+                    answers {
                       data {
                         id
                         attributes {
-                          answer {
-                            data {
-                              id
-                              attributes {
-                                rate
-                              }
-                            }
-                          }
+                          rate
                         }
                       }
                     }
                   }
                 }
               }
-            }
-          }
-        }
-        postRoles {
-          data {
-            id
-            attributes {
-              postRole
             }
           }
         }
