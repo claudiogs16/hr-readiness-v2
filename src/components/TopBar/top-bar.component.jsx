@@ -1,12 +1,11 @@
 import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
 import { useContext } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../contexts/AuthContext";
-import SideBar from "./side-bar";
+import { AuthContext } from "../../contexts/auth-context";
+import SideBar from "./side-bar.component";
 
 const TopBar = () => {
   const { logout } = useContext(AuthContext);
-
 
   return (
     <>
@@ -23,7 +22,17 @@ const TopBar = () => {
           </Toolbar>
         </AppBar>
       </Box>
-      <Outlet />
+      <Box
+        sx={{
+          backgroundColor: "transparent",
+          marginLeft: { xs: "20px", md: "70px" },
+          marginRight: { xs: "20px", md: "70px" },
+          marginTop: {xs: "30px", md: "70px"},
+          marginBottom: "20px"
+        }}
+      >
+        <Outlet />
+      </Box>
     </>
   );
 };

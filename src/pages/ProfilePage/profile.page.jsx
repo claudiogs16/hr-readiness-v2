@@ -1,44 +1,17 @@
 import { Grid, TextField } from "@mui/material";
-import jwtDecode from "jwt-decode";
-import BackButton from "../../components/Button/back-button.component";
 import MainCard from "../../components/MainCard/main-card.component";
 import MainContainer from "../../components/MainContainer/main-container.component";
-import { GET_ALL_USER_DATA_BY_ID } from "../../gqloperation/query";
-import { useMutation, useQuery } from "@apollo/client";
-import Loading from "../../components/Loading/loading.component";
 
 const ProfilePage = () => {
-  const jwt = localStorage.getItem("jwtToken");
-  const { id: userID } = jwtDecode(jwt);
-
-  const { loading, data } = useQuery(GET_ALL_USER_DATA_BY_ID, {
-    variables: {
-      filters: {
-        id: {
-          eq: userID,
-        },
-      },
-    },
-    context: {
-      headers: {
-        authorization: `Bearer ${jwt}`,
-      },
-    },
-    fetchPolicy: "network-only",
-  });
-
-  if (loading) return <Loading />;
-
-
   return (
-    <MainContainer title="Meu Perfil" maxWidth="sm">
-      <MainCard title={<BackButton />}>
+    <MainContainer maxWidth="sm">
+      <MainCard title="Meu Perfil">
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <TextField
               id="name"
               disabled
-              label={data.usersPermissionsUsers.data[0].attributes.name}
+              label="Nome Completo"
               defaultValue=""
               fullWidth
               type="text"
@@ -50,7 +23,7 @@ const ProfilePage = () => {
               id="email"
               disabled
               label="Email"
-              defaultValue={data.usersPermissionsUsers.data[0].attributes.email}
+              defaultValue=""
               fullWidth
               type="text"
               name="email"
@@ -61,9 +34,7 @@ const ProfilePage = () => {
               id="contact"
               disabled
               label="Contacto"
-              defaultValue={
-                data.usersPermissionsUsers.data[0].attributes.contact
-              }
+              defaultValue=""
               fullWidth
               type="text"
               name="contact"
@@ -74,9 +45,7 @@ const ProfilePage = () => {
               id="start_date"
               disabled
               label="Data de Inicio"
-              defaultValue={
-                data.usersPermissionsUsers.data[0].attributes.start_date
-              }
+              defaultValue=""
               fullWidth
               type="date"
               name="start_date"
@@ -90,10 +59,7 @@ const ProfilePage = () => {
               id="postRole"
               disabled
               label="Cargo"
-              defaultValue={
-                data.usersPermissionsUsers.data[0].attributes.postRole.data
-                  .attributes.postRole
-              }
+              defaultValue=""
               fullWidth
               type="text"
               name="postRole"
@@ -104,10 +70,7 @@ const ProfilePage = () => {
               id="role"
               disabled
               label="Permissão"
-              defaultValue={
-                data.usersPermissionsUsers.data[0].attributes.userRole.data
-                  .attributes.description
-              }
+              defaultValue=""
               fullWidth
               type="text"
               name="role"

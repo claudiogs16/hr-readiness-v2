@@ -1,18 +1,18 @@
 import { Grid } from "@mui/material";
-import EmployeerForm from "./employeer-form.component";
-import EmployeerList from "./employeer-list.component";
+import CategoryForm from "./category-form.component";
+import CategoryList from "./category-list.component";
 
-const EmployeerPage = () => {
+const EmployeerCategoryPage = () => {
   return (
     <Grid container spacing={5} maxWidth="lg" style={{ margin: "0 auto" }}>
       <Grid item xs={12} md={7}>
-        <EmployeerList />
+        <CategoryList />
       </Grid>
       <Grid item xs={12} md={5}>
-        <EmployeerForm />
+        <CategoryForm />
       </Grid>
     </Grid>
   );
 };
 
-export default EmployeerPage;
+export default EmployeerCategoryPage;

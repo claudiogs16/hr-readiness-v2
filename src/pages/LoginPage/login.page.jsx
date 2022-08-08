@@ -1,27 +1,18 @@
-import { Container } from "@mui/material";
-import { useState } from "react";
+import { Outlet } from "react-router-dom";
 import MainCard from "../../components/MainCard/main-card.component";
-import EmailForm from "./email-form";
-import SignInForm from "./sign-in-form";
+import MainContainer from "../../components/MainContainer/main-container.component";
 
 const LoginPage = () => {
-  const [form, setForm] = useState("EMAIL");
-
   return (
-    <Container maxWidth="xs" sx={{ marginTop: { xs: "70px", md: "50px" } }}>
-      <MainCard>
-        {(() => {
-          switch (form) {
-            case "EMAIL":
-              return <EmailForm setForm={setForm} />;
-            case "PASSWORD":
-              return <SignInForm setForm={setForm} />;
-            default:
-              return <EmailForm setForm={setForm} />;
-          }
-        })()}
-      </MainCard>
-    </Container>
+    <div style={{ marginTop: "40px" }}>
+      <MainContainer maxWidth="xs">
+        <MainCard>
+          <div style={{paddingLeft: "20px", paddingRight: "20px"}}>
+            <Outlet />
+          </div>
+        </MainCard>
+      </MainContainer>
+    </div>
   );
 };
 

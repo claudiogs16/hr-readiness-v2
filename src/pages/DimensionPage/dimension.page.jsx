@@ -1,16 +1,18 @@
-import BackButton from "../../components/Button/back-button.component";
-import MainCard from "../../components/MainCard/main-card.component";
-import MainContainer from "../../components/MainContainer/main-container.component";
-import { Outlet } from "react-router-dom";
+import { Grid } from "@mui/material";
+import DimensionForm from "./dimension-form";
+import DimensionList from "./dimension-list";
 
 const DimensionPage = () => {
-  return (
-    <MainContainer title="Dimensão" maxWidth="sm">
-      <MainCard title={<BackButton />}>
-        <Outlet />
-      </MainCard>
-    </MainContainer>
-  );
-};
-
+    return (
+        <Grid container spacing={5} maxWidth="lg" style={{ margin: "0 auto" }}>
+      <Grid item xs={12} md={7}>
+        <DimensionList />
+      </Grid>
+      <Grid item xs={12} md={5}>
+        <DimensionForm />
+      </Grid>
+    </Grid>
+    );
+}
+ 
 export default DimensionPage;

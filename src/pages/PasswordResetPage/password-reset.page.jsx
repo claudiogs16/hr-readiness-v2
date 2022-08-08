@@ -1,22 +1,16 @@
-import { Button, Grid, TextField } from "@mui/material";
+import { Button, Grid, TextField, Typography } from "@mui/material";
 import MainCard from "../../components/MainCard/main-card.component";
 import MainContainer from "../../components/MainContainer/main-container.component";
 
-const SystemPage = () => {
+const PasswordResetPage = () => {
     return (
-        <MainContainer maxWidth="xs">
-            <MainCard title="Definições">
+        <MainContainer maxWidth="sm">
+            <MainCard title="Repor Senha">
             <Grid container spacing={3}>
             <Grid item xs={12}>
-              <TextField
-                required
-                label="Empresa"
-                defaultValue=""
-                fullWidth
-                type="text"
-                name="company"
-                
-              />
+              <Typography style={{ opacity: 0.8 }}>
+                Insira o email do utilizador no campo abaixo para repor a senha.
+              </Typography>
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -29,14 +23,14 @@ const SystemPage = () => {
                 
               />
             </Grid>
-
             <Grid item xs={12}>
-              <Button size="medium" variant="contained" type="submit" fullWidth>Alterar</Button>
+              <Button size="medium" type="submit" variant="contained" fullWidth>Repor</Button>
             </Grid>
           </Grid>
+
             </MainCard>
         </MainContainer>
     );
 }
  
-export default SystemPage;
+export default PasswordResetPage;
