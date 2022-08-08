@@ -6,9 +6,10 @@ import VpnKeyIcon from "@mui/icons-material/VpnKey";
 import LockResetIcon from "@mui/icons-material/LockReset";
 import ConstructionIcon from "@mui/icons-material/Construction";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
-import GroupsIcon from "@mui/icons-material/Groups";
+import PushPinIcon from '@mui/icons-material/PushPin';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import GroupWorkIcon from "@mui/icons-material/GroupWork";
+import QuizIcon from '@mui/icons-material/Quiz';
 import {
   Box,
   Divider,
@@ -98,8 +99,30 @@ const SideBar = () => {
                 navigate("/dimension");
               }}
             >
-              <Tooltip placement="left-start" title="Dimensões">
+              <Tooltip placement="left-start" title="Gerenciar Dimensões">
                 <AccountTreeIcon />
+              </Tooltip>
+            </ListItem>
+            <ListItem
+              button
+              onClick={() => {
+                setOpen(false);
+                navigate("/indicator");
+              }}
+            >
+              <Tooltip placement="left-start" title="Gerenciar Indicadores">
+                <PushPinIcon />
+              </Tooltip>
+            </ListItem>
+            <ListItem
+              button
+              onClick={() => {
+                setOpen(false);
+                navigate("/question");
+              }}
+            >
+              <Tooltip placement="left-start" title="Gerenciar Questoes">
+                <QuizIcon />
               </Tooltip>
             </ListItem>
 

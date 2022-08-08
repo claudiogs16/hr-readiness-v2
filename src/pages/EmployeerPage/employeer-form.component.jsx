@@ -119,7 +119,7 @@ const EmployeerForm = () => {
             </FormControl>
           </Grid>
           <Grid item xs={12}>
-            <Button type="submit" size="medium" variant="contained" fullWidth>
+            <Button type="submit" size="large" variant="contained" fullWidth>
               Registrar
             </Button>
           </Grid>

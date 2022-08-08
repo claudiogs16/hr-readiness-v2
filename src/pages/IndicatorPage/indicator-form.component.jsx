@@ -1,29 +1,17 @@
-import { Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import { Button, FormControl, Grid, InputLabel, Select, TextField } from "@mui/material";
 import MainCard from "../../components/MainCard/main-card.component";
 
-const DimensionForm = () => {
+const IndicatorForm = () => {
     return (
-        <MainCard title="Dimensão" >
+        <MainCard title="Indicador" >
       <form action="">
         <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <TextField
-              autoFocus
-              required
-              multiline
-              rows={2}
-              label="Dimensão"
-              defaultValue=""
-              fullWidth
-              type="text"
-              name="name"
-            />
-          </Grid>
+          
           
           
           <Grid item xs={12}>
             <FormControl fullWidth>
-              <InputLabel id="select-post-role-input-label">Categoria</InputLabel>
+              <InputLabel id="select-post-role-input-label">Dimensao</InputLabel>
               <Select
                 labelId="select-post-role-label"
                 id="select-post-role"
@@ -32,6 +20,19 @@ const DimensionForm = () => {
                 
               ></Select>
             </FormControl>
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              autoFocus
+              required
+              multiline
+              rows={2}
+              label="Indicador"
+              defaultValue=""
+              fullWidth
+              type="text"
+              name="name"
+            />
           </Grid>
           
           <Grid item xs={12}>
@@ -45,4 +46,4 @@ const DimensionForm = () => {
     );
 }
  
-export default DimensionForm;
+export default IndicatorForm;

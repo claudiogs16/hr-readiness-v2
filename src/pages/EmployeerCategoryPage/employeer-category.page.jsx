@@ -4,10 +4,11 @@ import CategoryList from "./category-list.component";
 
 const EmployeerCategoryPage = () => {
   return (
-    <Grid container spacing={5} maxWidth="lg" style={{ margin: "0 auto" }}>
-      <Grid item xs={12} md={7}>
+    <Grid container spacing={1} maxWidth="lg" style={{ margin: "0 auto" }}>
+      <Grid item xs={12} md={5}>
         <CategoryList />
       </Grid>
+      <Grid item xs={2} ></Grid>
       <Grid item xs={12} md={5}>
         <CategoryForm />
       </Grid>

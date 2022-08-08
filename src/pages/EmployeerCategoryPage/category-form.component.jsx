@@ -29,7 +29,7 @@ const CategoryForm = () => {
           </Grid>
 
           <Grid item xs={12}>
-            <Button type="submit" variant="contained" size="medium" fullWidth>Adicionar</Button>
+            <Button type="submit" variant="contained" size="large" fullWidth>Adicionar</Button>
           </Grid>
         </Grid>
       </form>

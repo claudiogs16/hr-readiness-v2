@@ -15,13 +15,22 @@ import LoginEmail from "./pages/LoginPage/login-email.component";
 import LoginPassword from "./pages/LoginPage/login-password.component";
 import LoginCreatePassword from "./pages/LoginPage/login-create-password.component";
 import DimensionPage from "./pages/DimensionPage/dimension.page";
+import IndicatorPage from "./pages/IndicatorPage/indicator.page";
+import QuestionPage from "./pages/QuestionPage/question.page";
+import { LoginContextProvider } from "./contexts/login-context";
+import { AuthProvider } from "./contexts/auth-context";
+import PrivateRoute from "./routes/private.routes";
+import PublicRoute from "./routes/public.routes";
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
+      <AuthProvider>
+      <LoginContextProvider>
       <CssBaseline />
       <Router>
         <Routes>
+          <Route element={<PrivateRoute />}>
           <Route path="/" element={<TopBar />} >
             <Route index element={<HomePage />} />
             <Route path="profile" element={<ProfilePage />} />
@@ -31,14 +40,22 @@ function App() {
             <Route path="password/reset" element={<PasswordResetPage />} />
             <Route path="system" element={<SystemPage />} />
             <Route path="dimension" element={<DimensionPage />} />
+            <Route path="indicator" element={<IndicatorPage />} />
+            <Route path="question" element={<QuestionPage />} />
           </Route>
+          </Route>
+          
+          <Route element={<PublicRoute />}>
           <Route path="/login" element={<LoginPage />}>
             <Route index element={<LoginEmail />} />
             <Route path="password" element={<LoginPassword />} />
             <Route path="password/create" element={<LoginCreatePassword />} />
           </Route>
+          </Route>
         </Routes>
       </Router>
+      </LoginContextProvider>
+      </AuthProvider>
     </ThemeProvider>
   );
 }

@@ -24,7 +24,7 @@ const PasswordResetPage = () => {
               />
             </Grid>
             <Grid item xs={12}>
-              <Button size="medium" type="submit" variant="contained" fullWidth>Repor</Button>
+              <Button size="large" type="submit" variant="contained" fullWidth>Repor</Button>
             </Grid>
           </Grid>
 

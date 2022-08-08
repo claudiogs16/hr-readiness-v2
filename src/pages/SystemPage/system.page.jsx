@@ -31,7 +31,7 @@ const SystemPage = () => {
             </Grid>
 
             <Grid item xs={12}>
-              <Button size="medium" variant="contained" type="submit" fullWidth>Alterar</Button>
+              <Button size="large" variant="contained" type="submit" fullWidth>Alterar</Button>
             </Grid>
           </Grid>
             </MainCard>
