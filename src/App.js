@@ -9,7 +9,6 @@ import PasswordChangePage from "./pages/PasswordChangePage/password-change.page"
 import SystemPage from "./pages/SystemPage/system.page";
 import PasswordResetPage from "./pages/PasswordResetPage/password-reset.page";
 import EmployeerPage from "./pages/EmployeerPage/employeer.page";
-import EmployeerCategoryPage from "./pages/EmployeerCategoryPage/employeer-category.page";
 import LoginPage from "./pages/LoginPage/login.page";
 import LoginEmail from "./pages/LoginPage/login-email.component";
 import LoginPassword from "./pages/LoginPage/login-password.component";
@@ -21,6 +20,7 @@ import { LoginContextProvider } from "./contexts/login-context";
 import { AuthProvider } from "./contexts/auth-context";
 import PrivateRoute from "./routes/private.routes";
 import PublicRoute from "./routes/public.routes";
+import PostRolePage from "./pages/PostRolePage/post-role.page";
 
 function App() {
   return (
@@ -35,7 +35,7 @@ function App() {
             <Route index element={<HomePage />} />
             <Route path="profile" element={<ProfilePage />} />
             <Route path="employeer" element={<EmployeerPage />} />
-            <Route path="employeer/category" element={<EmployeerCategoryPage />} />
+            <Route path="employeer/category" element={<PostRolePage />} />
             <Route path="password/change" element={<PasswordChangePage />} />
             <Route path="password/reset" element={<PasswordResetPage />} />
             <Route path="system" element={<SystemPage />} />

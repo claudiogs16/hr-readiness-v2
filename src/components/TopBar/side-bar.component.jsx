@@ -88,7 +88,7 @@ const SideBar = () => {
                 navigate("/employeer/category");
               }}
             >
-              <Tooltip placement="left-start" title="Categoria de Funcionários">
+              <Tooltip placement="left-start" title="Gerenciar Cargos">
                 <GroupWorkIcon />
               </Tooltip>
             </ListItem>

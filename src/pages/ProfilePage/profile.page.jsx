@@ -1,8 +1,62 @@
+import { useLazyQuery } from "@apollo/client";
 import { Grid, TextField } from "@mui/material";
+import jwtDecode from "jwt-decode";
+import { useEffect, useState } from "react";
 import MainCard from "../../components/MainCard/main-card.component";
 import MainContainer from "../../components/MainContainer/main-container.component";
+import { GET_EMPLOYEER_DATA } from "./query.gql";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ProfilePage = () => {
+  const jwt = localStorage.getItem("jwtToken");
+  const { id: employeerID } = jwtDecode(jwt);
+  const [loading, setLoading] = useState(true)
+  const [profileData, setProfileData] = useState({
+    name: '',
+    email: '',
+    contact: '',
+    startData: '',
+    postRole: '',
+    userRole: ''
+  })
+
+  const [getEmployeerData] = useLazyQuery(GET_EMPLOYEER_DATA)
+
+  useEffect(()=>{
+    getEmployeerData({
+      variables: {
+          "usersPermissionsUserId": employeerID
+      },
+      context: {
+        headers: {
+          authorization: `Bearer ${jwt}`,
+        },
+      },
+      fetchPolicy: "network-only",
+    }).then(data=>{
+      
+      let employeerData = data.data.usersPermissionsUser.data.attributes;
+      setProfileData(pd=>{
+        return {
+          ...pd,
+          name: employeerData.name,
+          email: employeerData.email,
+          contact: employeerData.contact,
+          startData: employeerData.start_date,
+          postRole: employeerData.postRole.data.attributes.postRole,
+          userRole: employeerData.userRole.data.attributes.description
+        }
+      })
+      setLoading(false)
+    }).catch(e=>{
+      setLoading(false)
+      toast.error("Ocorreu um erro ao carregar os dados!!");
+    })
+  },[])
+
+  if(loading) return <h1>Carregando...</h1>
+
   return (
     <MainContainer maxWidth="sm">
       <MainCard title="Meu Perfil">
@@ -12,7 +66,7 @@ const ProfilePage = () => {
               id="name"
               disabled
               label="Nome Completo"
-              defaultValue=""
+              defaultValue={profileData.name}
               fullWidth
               type="text"
               name="name"
@@ -23,9 +77,9 @@ const ProfilePage = () => {
               id="email"
               disabled
               label="Email"
-              defaultValue=""
+              defaultValue={profileData.email}
               fullWidth
-              type="text"
+              type="email"
               name="email"
             />
           </Grid>
@@ -34,9 +88,9 @@ const ProfilePage = () => {
               id="contact"
               disabled
               label="Contacto"
-              defaultValue=""
+              defaultValue={profileData.contact}
               fullWidth
-              type="text"
+              type="number"
               name="contact"
             />
           </Grid>
@@ -45,7 +99,7 @@ const ProfilePage = () => {
               id="start_date"
               disabled
               label="Data de Inicio"
-              defaultValue=""
+              defaultValue={profileData.startData}
               fullWidth
               type="date"
               name="start_date"
@@ -59,7 +113,7 @@ const ProfilePage = () => {
               id="postRole"
               disabled
               label="Cargo"
-              defaultValue=""
+              defaultValue={profileData.postRole}
               fullWidth
               type="text"
               name="postRole"
@@ -70,13 +124,14 @@ const ProfilePage = () => {
               id="role"
               disabled
               label="Permissão"
-              defaultValue=""
+              defaultValue={profileData.userRole}
               fullWidth
               type="text"
               name="role"
             />
           </Grid>
         </Grid>
+        <ToastContainer />
       </MainCard>
     </MainContainer>
   );
