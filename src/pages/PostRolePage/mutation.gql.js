@@ -13,3 +13,17 @@ mutation Mutation($data: PostRoleInput!) {
     }
   }
 `;
+
+export const UPDATE_POST_ROLE = gql`
+mutation UpdatePostRole($updatePostRoleId: ID!, $data: PostRoleInput!) {
+  updatePostRole(id: $updatePostRoleId, data: $data) {
+    data {
+      id
+      attributes {
+        postRole
+        description
+      }
+    }
+  }
+}
+`;

@@ -21,40 +21,55 @@ import { AuthProvider } from "./contexts/auth-context";
 import PrivateRoute from "./routes/private.routes";
 import PublicRoute from "./routes/public.routes";
 import PostRolePage from "./pages/PostRolePage/post-role.page";
+import { PostRoleProvider } from "./contexts/postRole-context";
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <AuthProvider>
-      <LoginContextProvider>
-      <CssBaseline />
-      <Router>
-        <Routes>
-          <Route element={<PrivateRoute />}>
-          <Route path="/" element={<TopBar />} >
-            <Route index element={<HomePage />} />
-            <Route path="profile" element={<ProfilePage />} />
-            <Route path="employeer" element={<EmployeerPage />} />
-            <Route path="employeer/category" element={<PostRolePage />} />
-            <Route path="password/change" element={<PasswordChangePage />} />
-            <Route path="password/reset" element={<PasswordResetPage />} />
-            <Route path="system" element={<SystemPage />} />
-            <Route path="dimension" element={<DimensionPage />} />
-            <Route path="indicator" element={<IndicatorPage />} />
-            <Route path="question" element={<QuestionPage />} />
-          </Route>
-          </Route>
-          
-          <Route element={<PublicRoute />}>
-          <Route path="/login" element={<LoginPage />}>
-            <Route index element={<LoginEmail />} />
-            <Route path="password" element={<LoginPassword />} />
-            <Route path="password/create" element={<LoginCreatePassword />} />
-          </Route>
-          </Route>
-        </Routes>
-      </Router>
-      </LoginContextProvider>
+        <LoginContextProvider>
+          <PostRoleProvider>
+            <CssBaseline />
+            <Router>
+              <Routes>
+                <Route element={<PrivateRoute />}>
+                  <Route path="/" element={<TopBar />}>
+                    <Route index element={<HomePage />} />
+                    <Route path="profile" element={<ProfilePage />} />
+                    <Route path="employeer" element={<EmployeerPage />} />
+                    <Route
+                      path="employeer/category"
+                      element={<PostRolePage />}
+                    />
+                    <Route
+                      path="password/change"
+                      element={<PasswordChangePage />}
+                    />
+                    <Route
+                      path="password/reset"
+                      element={<PasswordResetPage />}
+                    />
+                    <Route path="system" element={<SystemPage />} />
+                    <Route path="dimension" element={<DimensionPage />} />
+                    <Route path="indicator" element={<IndicatorPage />} />
+                    <Route path="question" element={<QuestionPage />} />
+                  </Route>
+                </Route>
+
+                <Route element={<PublicRoute />}>
+                  <Route path="/login" element={<LoginPage />}>
+                    <Route index element={<LoginEmail />} />
+                    <Route path="password" element={<LoginPassword />} />
+                    <Route
+                      path="password/create"
+                      element={<LoginCreatePassword />}
+                    />
+                  </Route>
+                </Route>
+              </Routes>
+            </Router>
+          </PostRoleProvider>
+        </LoginContextProvider>
       </AuthProvider>
     </ThemeProvider>
   );

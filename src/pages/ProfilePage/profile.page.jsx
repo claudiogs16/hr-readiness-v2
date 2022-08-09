@@ -11,22 +11,22 @@ import "react-toastify/dist/ReactToastify.css";
 const ProfilePage = () => {
   const jwt = localStorage.getItem("jwtToken");
   const { id: employeerID } = jwtDecode(jwt);
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
   const [profileData, setProfileData] = useState({
-    name: '',
-    email: '',
-    contact: '',
-    startData: '',
-    postRole: '',
-    userRole: ''
-  })
+    name: "",
+    email: "",
+    contact: "",
+    startData: "",
+    postRole: "",
+    userRole: "",
+  });
 
-  const [getEmployeerData] = useLazyQuery(GET_EMPLOYEER_DATA)
+  const [getEmployeerData] = useLazyQuery(GET_EMPLOYEER_DATA);
 
-  useEffect(()=>{
+  useEffect(() => {
     getEmployeerData({
       variables: {
-          "usersPermissionsUserId": employeerID
+        usersPermissionsUserId: employeerID,
       },
       context: {
         headers: {
@@ -34,28 +34,29 @@ const ProfilePage = () => {
         },
       },
       fetchPolicy: "network-only",
-    }).then(data=>{
-      
-      let employeerData = data.data.usersPermissionsUser.data.attributes;
-      setProfileData(pd=>{
-        return {
-          ...pd,
-          name: employeerData.name,
-          email: employeerData.email,
-          contact: employeerData.contact,
-          startData: employeerData.start_date,
-          postRole: employeerData.postRole.data.attributes.postRole,
-          userRole: employeerData.userRole.data.attributes.description
-        }
-      })
-      setLoading(false)
-    }).catch(e=>{
-      setLoading(false)
-      toast.error("Ocorreu um erro ao carregar os dados!!");
     })
-  },[])
+      .then((data) => {
+        let employeerData = data.data.usersPermissionsUser.data.attributes;
+        setProfileData((pd) => {
+          return {
+            ...pd,
+            name: employeerData.name,
+            email: employeerData.email,
+            contact: employeerData.contact,
+            startData: employeerData.start_date,
+            postRole: employeerData.postRole.data.attributes.postRole,
+            userRole: employeerData.userRole.data.attributes.description,
+          };
+        });
+        setLoading(false);
+      })
+      .catch((e) => {
+        setLoading(false);
+        toast.error("Ocorreu um erro ao carregar os dados!!");
+      });
+  }, []);
 
-  if(loading) return <h1>Carregando...</h1>
+  if (loading) return <h1>Carregando...</h1>;
 
   return (
     <MainContainer maxWidth="sm">
