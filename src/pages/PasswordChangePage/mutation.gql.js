@@ -12,15 +12,16 @@ export const LOGIN = gql`
   }
 `;
 
-export const UPDATE_USER_PASSWORD = gql`
-  mutation Mutation(
-    $updateUsersPermissionsUserId: ID!
+export const UPDATE_PASSWORD = gql`
+  mutation UpdateUsersPermissionsUser(
     $data: UsersPermissionsUserInput!
+    $updateUsersPermissionsUserId: ID!
   ) {
-    updateUsersPermissionsUser(id: $updateUsersPermissionsUserId, data: $data) {
+    updateUsersPermissionsUser(data: $data, id: $updateUsersPermissionsUserId) {
       data {
+        id
         attributes {
-          email
+          name
         }
       }
     }

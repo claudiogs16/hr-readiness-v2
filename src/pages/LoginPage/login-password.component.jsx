@@ -1,4 +1,12 @@
-import { Avatar, Button, Chip, Grid, Stack, TextField, Typography } from "@mui/material";
+import {
+  Avatar,
+  Button,
+  Chip,
+  Grid,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import { useNavigate } from "react-router-dom";
 import { useContext, useEffect } from "react";
@@ -19,18 +27,16 @@ const validationEmailForm = yup
   })
   .required();
 
-
 const LoginPassword = () => {
   let navigate = useNavigate();
-  const {loginData,setLoginData} = useContext(LoginContext)
+  const { loginData, setLoginData } = useContext(LoginContext);
   const context = useContext(AuthContext);
 
-  const [login] = useMutation(LOGIN)
+  const [login] = useMutation(LOGIN);
 
-  useEffect(()=>{
-    if(loginData.email === "" || loginData.isResetPassword === true)
-      navigate("/login")
-
+  useEffect(() => {
+    if (loginData.email === "" || loginData.isResetPassword === true)
+      navigate("/login");
   }, [loginData]);
 
   const {
@@ -42,30 +48,30 @@ const LoginPassword = () => {
   });
 
   const handleClickDelete = () => {
-    setLoginData(ld => {
+    setLoginData((ld) => {
       return {
         ...ld,
-        email: ""
-      }
-    })
-  }
+        email: "",
+      };
+    });
+  };
 
-  const loginForm = dataForm => {
-
+  const loginForm = (dataForm) => {
     login({
       variables: {
-        "input": {
-          "identifier": loginData.email,
-          "password": dataForm.password
-        }
-      }
-    }).then(data => {
-      context.login(data.data.login)
-    }).catch(error => {
-      alert("Senha incorrecta!!")
+        input: {
+          identifier: loginData.email,
+          password: dataForm.password,
+        },
+      },
     })
-  }
-
+      .then((data) => {
+        context.login(data.data.login);
+      })
+      .catch((error) => {
+        alert("Senha incorrecta!!");
+      });
+  };
 
   return (
     <form onSubmit={handleSubmit(loginForm)} noValidate>
@@ -85,20 +91,20 @@ const LoginPassword = () => {
           </Stack>
         </Grid>
         <Grid
-            item
-            xs={12}
-            style={{ textAlign: "center", marginBottom: "10px" }}
-          >
-            <Typography style={{ marginBottom: "10px", opacity: 0.8 }}>
-              Seja Bem-vindo
-            </Typography>
-            <Chip
-              label={loginData.email}
-              variant="outlined"
-              onClick={() => {}}
-              onDelete={handleClickDelete}
-            />
-          </Grid>
+          item
+          xs={12}
+          style={{ textAlign: "center", marginBottom: "10px" }}
+        >
+          <Typography style={{ marginBottom: "10px", opacity: 0.8 }}>
+            Seja Bem-vindo
+          </Typography>
+          <Chip
+            label={loginData.email}
+            variant="outlined"
+            onClick={() => {}}
+            onDelete={handleClickDelete}
+          />
+        </Grid>
         <Grid item xs={12}>
           <TextField
             required
@@ -110,7 +116,7 @@ const LoginPassword = () => {
             name="password"
             id="password"
             {...register("password")}
-              helperText={errors.password?.message}
+            helperText={errors.password?.message}
           />
         </Grid>
         <Grid item xs={12}>

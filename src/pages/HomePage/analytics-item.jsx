@@ -16,10 +16,7 @@ const AnalyticsItem = ({ bgcolor, count, btnName, icon, url }) => {
       <CardContent style={{ textAlign: "center" }}>
         {icon && <div style={{ display: "block" }}>{icon}</div>}
         {count && (
-          <Typography
-            variant="h6"
-            style={{ fontWeight: "bold", opacity: 0.6}}
-          >
+          <Typography variant="h6" style={{ fontWeight: "bold", opacity: 0.6 }}>
             {count}
           </Typography>
         )}

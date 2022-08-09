@@ -15,7 +15,7 @@ const QuestionList = () => {
             </IconButton>
           }
         >
-          <ListItemText primary="Qual e o estado de implementacao da estrategia digital dos portos de Cabo Verde?" secondary="Indicador A" />
+          <ListItemText  primary="Qual e o estado de implementacao da estrategia digital dos portos de Cabo Verde?" secondary="Indicador A" />
         </ListItem>
         <ListItem
           key="2"

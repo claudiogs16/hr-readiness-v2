@@ -7,7 +7,7 @@ const LoginPage = () => {
     <div style={{ marginTop: "40px" }}>
       <MainContainer maxWidth="xs">
         <MainCard>
-          <div style={{paddingLeft: "20px", paddingRight: "20px"}}>
+          <div style={{ paddingLeft: "20px", paddingRight: "20px" }}>
             <Outlet />
           </div>
         </MainCard>
