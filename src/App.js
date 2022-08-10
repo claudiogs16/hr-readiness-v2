@@ -23,6 +23,8 @@ import PublicRoute from "./routes/public.routes";
 import PostRolePage from "./pages/PostRolePage/post-role.page";
 import { PostRoleProvider } from "./contexts/postRole-context";
 
+document.title = 'HR-Readiness';
+
 function App() {
   return (
     <ThemeProvider theme={theme}>
