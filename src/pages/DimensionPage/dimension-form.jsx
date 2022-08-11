@@ -5,8 +5,14 @@ import Box from "@mui/material/Box";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import Chip from "@mui/material/Chip";
 import { useEffect, useState } from "react";
-import { useLazyQuery } from "@apollo/client";
-import { GET_POST_ROLES } from "./query.gql";
+import { useLazyQuery, useMutation } from "@apollo/client";
+import { GET_POST_ROLES, GET_POST_ROLE_ID_BY_POST_ROLE_NAME } from "./query.gql";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { CREATE_DIMENSION, UPDATE_DIMENSION } from "./mutation.gql";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -20,14 +26,28 @@ const MenuProps = {
 };
 
 
-const DimensionForm = () => {
+const validationEmailForm = yup
+  .object({
+    dimension: yup
+      .string()
+      .min(6, "Dimensao precisa ter mais de 6 caracteres")
+      .required("Dimensao é obrigatorio"),      
+  })
+  .required();
+
+
+const DimensionForm = ({dimension,setDimension, dimensions, setDimensions}) => {
 
   const jwt = localStorage.getItem("jwtToken");
   const theme = useTheme();
   const [personName, setPersonName] = useState([]);
   const [names, setNames] = useState([]);
+  const [btnName, setBtnName] = useState("Adicionar")
 
   const [getPostRoles] = useLazyQuery(GET_POST_ROLES)
+  const [getPostRolesID] = useLazyQuery(GET_POST_ROLE_ID_BY_POST_ROLE_NAME)
+  const [createDimension] = useMutation(CREATE_DIMENSION)
+  const [updateDimension] = useMutation(UPDATE_DIMENSION)
 
   function getStyles(name, personName, theme) {
     return {
@@ -37,6 +57,14 @@ const DimensionForm = () => {
           : theme.typography.fontWeightMedium,
     };
   }
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(validationEmailForm),
+  });
 
   const handleChange = (event) => {
     const {
@@ -49,6 +77,7 @@ const DimensionForm = () => {
   };
 
   useEffect(()=>{
+    
     getPostRoles({
       context: {
         headers: {
@@ -57,21 +86,137 @@ const DimensionForm = () => {
       },
       fetchPolicy: 'network-only' 
     }).then(data => {
-      // console.log(data.data.postRoles.data)
+      
       let postRoleList = data.data.postRoles.data;
       
-      // console.log(postRoleList)
 
       setNames(postRoleList.map(rl=>rl.attributes.postRole))
-      // console.log(names)
     }).catch(error=>{
       console.log("Erro ao carregar dados")
     })
+
+    if(dimension.id !== '')
+      setBtnName("Actualizar")
+
+
+    setPersonName(dimension.postRoles)
+    
+    
   },[])
+
+  const formDimension = formData => {
+    
+    if(personName.length === 0){
+      toast.warning("Tens de escolher Cargo!!")
+      return false
+    }
+    
+    
+    getPostRolesID({
+      variables: {
+        "filters": {
+          "postRole": {
+            "in": personName
+          }
+        }
+      },
+      context: {
+        headers: {
+          authorization: `Bearer ${jwt}`,
+        },
+      },
+      fetchPolicy: 'network-only'
+    }).then(data => {
+      
+      let postRolesID = [];
+      postRolesID = data.data.postRoles.data.map(pr => pr.id)
+
+      
+
+      if(dimension.id === ''){
+
+        createDimension({
+          variables: {
+            "data": {
+              "dimension": formData.dimension,
+              "postRoles": postRolesID
+            }
+          },
+          context: {
+            headers: {
+              authorization: `Bearer ${jwt}`,
+            },
+          },
+        }).then(data => {
+          
+
+          
+          let obj = dimensions.filter(d=> d.id !== dimension.id)
+
+       
+
+          obj.push(data.data.createDimension.data)
+
+          
+          setDimensions(obj)
+
+          toast.success("Dimensao adicionado com sucesso!")
+
+          setPersonName([])
+          document.getElementById("dimension").value = "";
+
+          
+
+        }).catch(error => {
+          toast.error("Ocorreu um erro ao adicionar dimensao!")
+        })
+        
+
+      }else{
+        
+          updateDimension({
+            variables: {
+              "updateDimensionId": dimension.id,
+              "data": {
+              "dimension": formData.dimension,
+              "postRoles": postRolesID
+            }
+            },
+            context: {
+              headers: {
+                authorization: `Bearer ${jwt}`,
+              },
+            },
+          }).then(data => {
+
+            
+
+            let obj = dimensions.filter(d=> d.id !== dimension.id)
+
+       
+
+          obj.push(data.data.updateDimension.data)
+
+          
+          setDimensions(obj)
+
+            toast.success("Dimensao actualizado com sucesso!!")
+          }).catch(error => {
+            toast.error("Ocorreu um erro ao actualizar dimensao!!")
+          })
+
+
+      }
+
+
+    })
+
+
+  }
 
     return (
        
-      <form action="">
+      <form onSubmit={handleSubmit(formDimension)} noValidate>
         <Grid container spacing={3} style={{marginTop: '5px'}}>
           <Grid item xs={12}>
             <TextField
@@ -80,10 +225,13 @@ const DimensionForm = () => {
               multiline
               rows={2}
               label="Dimensão"
-              defaultValue=""
+              defaultValue={dimension.dimension}
               fullWidth
               type="text"
               name="name"
+              id="dimension"
+              {...register("dimension")}
+              helperText={errors.dimension?.message}
             />
           </Grid>
           
@@ -124,8 +272,9 @@ const DimensionForm = () => {
           
           <Grid item xs={12}>
             <Button type="submit" size="large" variant="contained" fullWidth>
-              Adicionar
+              {btnName}
             </Button>
+            <ToastContainer />
           </Grid>
         </Grid>
       </form>
