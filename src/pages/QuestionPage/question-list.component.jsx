@@ -1,11 +1,31 @@
-import { IconButton, List, ListItem, ListItemText } from "@mui/material";
+import { IconButton, List, ListItem, ListItemText, Tooltip } from "@mui/material";
 import MainCard from "../../components/MainCard/main-card.component";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from '@mui/icons-material/Delete';
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+
+const ActionForm = ({ setOpen }) => {
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  return (
+    <Tooltip title="Adicionar Novo" placement="right">
+      <IconButton
+        color="info"
+        aria-label="Add"
+        component="span"
+        onClick={handleClickOpen}
+      >
+        <AddCircleIcon fontSize="medium" />
+      </IconButton>
+    </Tooltip>
+  );
+};
+
 
 const QuestionList = () => {
     return (
-        <MainCard title="Lista de Questoes">
+        <MainCard title="Lista de Questoes" headerAction={<ActionForm />}>
       <List sx={{ width: "100%", bgcolor: "background.paper" }}>
         <ListItem
           key="1"

@@ -1,7 +1,18 @@
+import { useLazyQuery } from "@apollo/client";
 import { FormControl, Grid, InputLabel, Select } from "@mui/material";
+import { useState } from "react";
 import MainCard from "../../components/MainCard/main-card.component";
+import { GET_INDICATOR } from "./query.gql";
 
 const SelectIndicator = () => {
+  const [indicators, setIndicators] = useState([]);
+
+  const [getIndicators] = useLazyQuery(GET_INDICATOR)
+
+
+
+
+
     return (
         <MainCard title="Selecionar Indicador">
             <FormControl fullWidth>
@@ -12,7 +23,10 @@ const SelectIndicator = () => {
                 value=""
                 label="Cargo"
                 
-              ></Select>
+              >
+
+                
+              </Select>
             </FormControl>
         </MainCard>
     );

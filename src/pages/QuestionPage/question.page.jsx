@@ -6,23 +6,17 @@ import SelectIndicator from "./SelectIndicator.component";
 
 const QuestionPage = () => {
     return (
-        <Grid container spacing={5} maxWidth="lg" style={{ margin: "0 auto" }}>
-        <Grid item xs={12} md={5}>
-          <Grid container>
-            <Grid xs={12} ><SelectIndicator /></Grid>
-            <Grid xs={12}><QuestionForm /></Grid>
-          </Grid>
-        </Grid>
-        <Grid item xs={12} md={7}>
-        <Grid container>
-            <Grid xs={12}><QuestionList /></Grid>
-          </Grid>
-        </Grid>
-        <Grid item xs={12} >
-        <Grid container>
-            <Grid xs={12}><QuestionRating /></Grid>
-          </Grid>
-        </Grid>
+        <Grid container  maxWidth="lg" style={{ margin: "0 auto" }}>
+        
+          
+            <Grid item xs={12} md={4} ><SelectIndicator /></Grid>
+            <Grid item xs={12} md={1} ></Grid>
+            <Grid item xs={12} md={7} ><QuestionList /></Grid>
+            <Grid item xs={12}  ><QuestionRating /></Grid>
+          
+        
+        
+        
         
       </Grid>  
     );

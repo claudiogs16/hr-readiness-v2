@@ -70,7 +70,7 @@ const IndicatorForm = ({indicator, setIndicator, indicators, setIndicators}) => 
       
       setDimensions(data.data.dimensions.data)
     }).catch(error => {
-      console.log("error")
+      toast.error("Ocorreu um erro ao carregar a lista de dimensao")
     })
 
     if(indicator.id !== '')
