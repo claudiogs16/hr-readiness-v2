@@ -31,7 +31,6 @@ const SystemPage = () => {
     email: "",
   });
   const [loading, setLoading] = useState(true);
-  const [isBtnOn, setIsBtnOn] = useState(true)
 
   const [getSystemData] = useLazyQuery(GET_SYSTEM_DATA);
   const [updateSystem] = useMutation(UPDATE_SYSTEM);

@@ -1,6 +1,5 @@
 import { Grid } from "@mui/material";
 import { useState } from "react";
-import QuestionForm from "./question-form.component";
 import QuestionList from "./question-list.component";
 import QuestionRating from "./question-rating.component";
 import SelectIndicator from "./SelectIndicator.component";

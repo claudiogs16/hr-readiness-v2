@@ -33,3 +33,22 @@ query Questions($filters: QuestionFiltersInput) {
   }
 }
 `;
+
+export const GET_ANSWER = gql`
+query Answers($filters: AnswerFiltersInput) {
+  answers(filters: $filters) {
+    data {
+      id
+      attributes {
+        rate
+        answer
+        indicator {
+          data {
+            id
+          }
+        }
+      }
+    }
+  }
+}
+`;
