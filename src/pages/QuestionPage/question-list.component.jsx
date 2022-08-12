@@ -1,8 +1,12 @@
-import { IconButton, List, ListItem, ListItemText, Tooltip } from "@mui/material";
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, List, ListItem, ListItemText, Tooltip } from "@mui/material";
 import MainCard from "../../components/MainCard/main-card.component";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import { useEffect, useMemo, useState } from "react";
+import QuestionForm from "./question-form.component";
+import { useLazyQuery } from "@apollo/client";
+import { GET_QUESTION } from "./query.gql";
 
 const ActionForm = ({ setOpen }) => {
   const handleClickOpen = () => {
@@ -23,31 +27,80 @@ const ActionForm = ({ setOpen }) => {
 };
 
 
-const QuestionList = () => {
+const QuestionList = ({indicatorID}) => {
+  const jwt = localStorage.getItem("jwtToken");
+    const [open, setOpen] = useState(false);
+    const [questions, setQuestions] = useState([])
+
+    const handleClose = () => {
+      setOpen(false)
+    }
+
+
+    const [getQuestions] = useLazyQuery(GET_QUESTION)
+
+
+    useEffect(()=>{
+      getQuestions({
+        variables: {
+          "filters": {
+            "indicator": {
+              "id": {
+                "eq": indicatorID
+              }
+            }
+          }
+        },
+        context: {
+          headers: {
+            authorization: `Bearer ${jwt}`,
+          },
+        },
+        fetchPolicy: 'network-only'
+      }).then(data => {
+        console.log(data.data.questions.data)
+        setQuestions(data.data.questions.data)
+      }).catch(error => {
+        console.log("Ocorreu um erro ao carregar questao!!")
+      })
+    },[indicatorID])
+
+
     return (
-        <MainCard title="Lista de Questoes" headerAction={<ActionForm />}>
+        <MainCard title="Lista de Questoes" headerAction={<ActionForm setOpen={setOpen} />}>
       <List sx={{ width: "100%", bgcolor: "background.paper" }}>
-        <ListItem
-          key="1"
-          secondaryAction={
-            <IconButton aria-label="edit">
-              <DeleteIcon />
-            </IconButton>
-          }
-        >
-          <ListItemText  primary="Qual e o estado de implementacao da estrategia digital dos portos de Cabo Verde?" secondary="Indicador A" />
-        </ListItem>
-        <ListItem
-          key="2"
-          secondaryAction={
-            <IconButton aria-label="edit">
-              <DeleteIcon />
-            </IconButton>
-          }
-        >
-          <ListItemText primary="Qual e o estado de implementacao  dos seus modelos  de negocio digital?" secondary="Indicador B" />
-        </ListItem>
+        
+        {
+          questions && questions.map(question => (
+            <ListItem
+            key={question.id}
+            secondaryAction={
+              <IconButton aria-label="edit">
+                <DeleteIcon />
+              </IconButton>
+            }
+          >
+            <ListItemText primary={question.attributes.question} />
+          </ListItem>
+          ))
+        }
+
+       
+
+
       </List>
+      <Dialog maxWidth='md' fullScreen={false} open={open} onClose={handleClose}>
+        <DialogTitle>Questao</DialogTitle>
+        <DialogContent>
+          
+          <QuestionForm />
+          
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Fechar</Button>
+          
+        </DialogActions>
+      </Dialog>
     </MainCard>
     );
 }
