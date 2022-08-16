@@ -11,10 +11,10 @@ import Analytics from "./analytics.component";
 import { GET_EMPLOYEER_DATA } from "./query.gql";
 
 const ProfileMenu = () => {
-  
+
   let navigate = useNavigate();
 
-  
+
 
 
   return (
@@ -49,27 +49,31 @@ const HomePage = () => {
 
   const [getEmployeerData] = useLazyQuery(GET_EMPLOYEER_DATA)
 
-  useEffect(()=>{
+  useEffect(() => {
     getEmployeerData({
       variables: {
-        
-          "usersPermissionsUserId": userID
-        
+
+        "usersPermissionsUserId": userID
+
       },
       context: {
         headers: {
           authorization: `Bearer ${jwt}`,
         },
       },
-    }).then(data=>{
-      console.log(data.data.usersPermissionsUser.data)
-      let employeerData = data.data.usersPermissionsUser.data
-    }).catch(e=>{
+    }).then(data => {
+
+      let employeerData = data.data.usersPermissionsUser.data;
+      setEmployeerData({
+        name: employeerData.attributes.name,
+        postRole: employeerData.attributes.postRole.data.attributes.description
+      })
+    }).catch(e => {
       console.log(e)
     })
-  },[])
+  }, [])
 
-  
+
 
   return (
     <Grid container spacing={3}>

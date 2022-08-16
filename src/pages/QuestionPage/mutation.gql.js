@@ -34,3 +34,26 @@ mutation Mutation($data: QuestionInput!) {
     }
   }
 `;
+
+
+export const CREATE_ANSWER = gql`
+mutation CreateAnswer($data: AnswerInput!) {
+  createAnswer(data: $data) {
+    data {
+      id
+      attributes {
+        rate
+        answer
+        indicator {
+          data {
+            id
+            attributes {
+              indicator
+            }
+          }
+        }
+      }
+    }
+  }
+}
+`;

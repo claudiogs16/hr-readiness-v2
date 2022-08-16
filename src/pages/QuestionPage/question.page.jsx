@@ -16,7 +16,7 @@ const QuestionPage = () => {
             <Grid item xs={12} md={4} ><SelectIndicator dimensions={dimensions} setDimensions={setDimensions} indicatorID={indicatorID} setIndicatorID={setIndicatorID} /></Grid>
             <Grid item xs={12} md={1} ></Grid>
             <Grid item xs={12} md={7} ><QuestionList indicatorID={indicatorID} /></Grid>
-            <Grid item xs={12}  ><QuestionRating /></Grid>
+            <Grid item xs={12}  ><QuestionRating indicatorID={indicatorID} /></Grid>
 
 
         </Grid>

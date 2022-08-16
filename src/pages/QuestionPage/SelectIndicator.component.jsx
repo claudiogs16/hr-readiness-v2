@@ -32,10 +32,9 @@ const SelectIndicator = ({ dimensions, setDimensions, indicatorID, setIndicatorI
       },
       fetchPolicy: 'network-only'
     }).then(data => {
-      console.log(data.data.dimensions.data)
       setDimensions(data.data.dimensions.data)
     })
-    console.log(dimensions)
+
   }, [])
 
 
@@ -60,13 +59,13 @@ const SelectIndicator = ({ dimensions, setDimensions, indicatorID, setIndicatorI
                     <option key={indicator.id} value={indicator.id}>{indicator.attributes.indicator}</option>
                   ))
                 }
-               
+
                 {/* <option value={2}>Option 2</option> */}
               </optgroup>
             ))
           }
 
-         
+
         </Select>
       </FormControl>
     </MainCard>

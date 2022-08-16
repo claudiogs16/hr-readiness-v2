@@ -29,143 +29,122 @@ const ActionForm = ({ setOpen }) => {
 };
 
 
-const QuestionList = ({indicatorID}) => {
+const QuestionList = ({ indicatorID }) => {
   const jwt = localStorage.getItem("jwtToken");
-    const [open, setOpen] = useState(false);
-    const [openConfirm, setOpenConfirm] = useState(false)
-    const [questions, setQuestions] = useState([])
-    const [questionDeleteID, setQuestionDeleteID] = useState("")
-    const [ratings, setRatings] = useState([])
+  const [open, setOpen] = useState(false);
+  const [openConfirm, setOpenConfirm] = useState(false)
+  const [questions, setQuestions] = useState([])
+  const [questionDeleteID, setQuestionDeleteID] = useState("")
 
-    const handleClose = () => {
-      setOpen(false)
-    }
 
-    const handleCloseConfirm = () => {
-      setQuestionDeleteID("");
+  const handleClose = () => {
+    setOpen(false)
+  }
+
+  const handleCloseConfirm = () => {
+    setQuestionDeleteID("");
+    setOpenConfirm(false)
+  }
+
+
+  const [getQuestions] = useLazyQuery(GET_QUESTION)
+  const [deleteQuestion] = useMutation(DELETE_QUESTION)
+
+
+  useEffect(() => {
+    getQuestions({
+      variables: {
+        "filters": {
+          "indicator": {
+            "id": {
+              "eq": indicatorID
+            }
+          }
+        }
+      },
+      context: {
+        headers: {
+          authorization: `Bearer ${jwt}`,
+        },
+      },
+      fetchPolicy: 'network-only'
+    }).then(data => {
+
+      setQuestions(data.data.questions.data)
+    }).catch(error => {
+      console.log("Ocorreu um erro ao carregar questao!!")
+    })
+
+
+
+
+  }, [indicatorID])
+
+
+  function handleClickDeleteQuestion(questionID) {
+    setQuestionDeleteID(questionID)
+    setOpenConfirm(true)
+
+  }
+
+  const handleClickConfirmDelete = () => {
+
+
+    deleteQuestion({
+      variables: {
+        "deleteQuestionId": questionDeleteID
+      },
+      context: {
+        headers: {
+          authorization: `Bearer ${jwt}`,
+        },
+      },
+    }).then(data => {
+      let newQuestions = questions.filter(q => q.id !== questionDeleteID)
+      setQuestions(newQuestions)
+      setQuestionDeleteID("")
       setOpenConfirm(false)
-    }
+    }).catch(error => {
+      console.log("Ocorreu um erro ao eliminar questao!!")
+    })
 
 
-    const [getQuestions] = useLazyQuery(GET_QUESTION)
-    const [getAnswer] = useLazyQuery(GET_ANSWER)
-    const [deleteQuestion] = useMutation(DELETE_QUESTION)
+  }
 
 
-    useEffect(()=>{
-      getQuestions({
-        variables: {
-          "filters": {
-            "indicator": {
-              "id": {
-                "eq": indicatorID
-              }
-            }
-          }
-        },
-        context: {
-          headers: {
-            authorization: `Bearer ${jwt}`,
-          },
-        },
-        fetchPolicy: 'network-only'
-      }).then(data => {
-        console.log(data.data.questions.data)
-        setQuestions(data.data.questions.data)
-      }).catch(error => {
-        console.log("Ocorreu um erro ao carregar questao!!")
-      })
-
-
-      getAnswer({
-        variables: {
-          "filters": {
-            "indicator": {
-              "id": {
-                "eq": null
-              }
-            }
-          }
-        },
-        context: {
-          headers: {
-            authorization: `Bearer ${jwt}`,
-          },
-        },
-      }).then(data => {
-        console.log(data)
-      }).catch(error => {
-        console.log(error)
-      })
-
-
-    },[indicatorID])
-
-
-    function handleClickDeleteQuestion(questionID){
-      setQuestionDeleteID(questionID)
-      setOpenConfirm(true)
-      
-    }
-
-    const handleClickConfirmDelete = () => {
-      console.log("Eliminando..... "+questionDeleteID)
-
-      deleteQuestion({
-        variables: {
-          "deleteQuestionId": questionDeleteID
-        },
-        context: {
-          headers: {
-            authorization: `Bearer ${jwt}`,
-          },
-        },
-      }).then(data=>{
-        let newQuestions = questions.filter(q => q.id !== questionDeleteID)
-        setQuestions(newQuestions)
-        setQuestionDeleteID("")
-        setOpenConfirm(false)
-      }).catch(error=> {
-        console.log("Ocorreu um erro ao eliminar questao!!")
-      })
-
-      
-    }
-
-
-    return (
-        <MainCard title="Lista de Questoes" headerAction={<ActionForm setOpen={setOpen} />}>
+  return (
+    <MainCard title="Lista de Questoes" headerAction={<ActionForm setOpen={setOpen} />}>
       <List sx={{ width: "100%", bgcolor: "background.paper" }}>
-        
+
         {
           questions && questions.map(question => (
             <ListItem
-            key={question.id}
-            secondaryAction={
-              <IconButton aria-label="edit" onClick={()=>handleClickDeleteQuestion(question.id)}>
-                <DeleteIcon />
-              </IconButton>
-            }
-          >
-            <ListItemText primary={question.attributes.question} />
-          </ListItem>
+              key={question.id}
+              secondaryAction={
+                <IconButton aria-label="edit" onClick={() => handleClickDeleteQuestion(question.id)}>
+                  <DeleteIcon />
+                </IconButton>
+              }
+            >
+              <ListItemText primary={question.attributes.question} />
+            </ListItem>
           ))
         }
 
-       
+
 
 
       </List>
       <Dialog maxWidth='md' fullScreen={false} open={open} onClose={handleClose}>
         <DialogTitle>Questao</DialogTitle>
         <DialogContent>
-          
+
           <QuestionForm indicatorID={indicatorID} questions={questions} setQuestions={setQuestions} />
-          
+
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Fechar</Button>
-          
+
         </DialogActions>
       </Dialog>
 
@@ -174,7 +153,7 @@ const QuestionList = ({indicatorID}) => {
         onClose={handleCloseConfirm}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
-        
+
       >
         <DialogTitle id="alert-dialog-title">
           Questao
@@ -193,7 +172,7 @@ const QuestionList = ({indicatorID}) => {
       </Dialog>
 
     </MainCard>
-    );
+  );
 }
- 
+
 export default QuestionList;
