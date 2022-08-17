@@ -9,12 +9,12 @@ import QuestionRatingItem from "./question-rating-item.component";
 const QuestionRating = ({ indicatorID }) => {
     const jwt = localStorage.getItem("jwtToken");
 
-    console.log(indicatorID)
+    
 
     const [getAnswers] = useLazyQuery(GET_ANSWER);
 
 
-
+    if(indicatorID === '') return <></>
 
 
     return (

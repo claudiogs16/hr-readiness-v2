@@ -1,47 +1,38 @@
 import { useLazyQuery, useMutation } from "@apollo/client";
 import { Button, FormControl, Input, InputAdornment, InputLabel } from "@mui/material";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useRef } from "react";
 import { GET_ANSWER } from "./query.gql";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { CREATE_ANSWER } from "./mutation.gql";
+import { CREATE_ANSWER, UPDATE_ANSWER } from "./mutation.gql";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useState } from "react";
 
 
-const validationEmailForm = yup
-  .object({
-    answer: yup
-      .string()
-      .min(6, "Resposta precisa ter mais de 6 caracteres")
-      .required("Resposta é obrigatorio"),
-  })
-  .required();
 
 
 
 const QuestionRatingItem = ({ rate, indicatorID }) => {
   const jwt = localStorage.getItem("jwtToken");
-  const [answer, setAnswer] = useState("")
-  const [answerID, setAnswerID] = useState("")
+  const refAnswer = useRef("")
+  const refAnswerID = useRef("");
+  const [visibility, setVisibility] = useState('hidden');
 
 
 
   const [getAnswer] = useLazyQuery(GET_ANSWER)
   const [createAnswer] = useMutation(CREATE_ANSWER)
+  const [updateAnswer] = useMutation(UPDATE_ANSWER)
 
 
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(validationEmailForm),
-  });
+  const handleChangeAnswer = () => {
+    setVisibility("");
+  }
+
 
 
   useEffect(() => {
+
     if (indicatorID !== "")
       getAnswer({
         variables: {
@@ -65,58 +56,107 @@ const QuestionRatingItem = ({ rate, indicatorID }) => {
       }).then(data => {
 
         let answerData = data.data.answers.data;
-        console.log(answerData)
 
-        if (answerData.lenght > 0) {
-          setAnswer(answerData.attributes.answer)
+
+        if (answerData.length !== 0) {
+          refAnswer.current.value = answerData[0].attributes.answer;
+          refAnswerID.current = answerData[0].id;
+
+        } else {
+          refAnswer.current.value = '';
+          refAnswerID.current = '';
         }
 
-        console.log(answer)
+
 
       }).catch(error => {
-        console.log(error)
+        toast.error("Ocorreu um erro ao carregar pontuacoes!!")
       })
 
-      
+
   }, [indicatorID])
 
 
-  const formAnswer = formData => {
-    console.log(formData)
-    createAnswer({
-      variables: {
-        "data": {
-          "rate": rate,
-          "answer": formData.answer,
-          "indicator": indicatorID
-        }
-      },
-      context: {
-        headers: {
-          authorization: `Bearer ${jwt}`,
+  const handleClickSave = () => {
+
+
+    if (refAnswer.current.value === '') {
+      toast.warning("Inserir pontuacao!!")
+      return false;
+    }
+
+    if (refAnswerID.current === '') {
+      createAnswer({
+        variables: {
+          "data": {
+            "rate": parseInt(rate),
+            "answer": refAnswer.current.value,
+            "indicator": indicatorID
+          }
         },
-      },
-    }).then(data => {
-      console.log(data)
-    }).catch(error => {
-      console.log(error)
-    })
+        context: {
+          headers: {
+            authorization: `Bearer ${jwt}`,
+          },
+        },
+      }).then(data => {
+        
+        refAnswerID.current = data.data.createAnswer.data.id;
+        setVisibility("hidden");
+        toast.success("Pontuacao adicionado com sucesso!!")
+      }).catch(error => {
+        toast.error("Ocorreu um erro ao adicionar pontuacao")
+      })
+
+
+
+    } else {
+
+      updateAnswer({
+        variables: {
+          "updateAnswerId": refAnswerID.current,
+          "data": {
+            "answer": refAnswer.current.value
+          }
+        },
+        context: {
+          headers: {
+            authorization: `Bearer ${jwt}`,
+          },
+        },
+      }).then(data => {
+        setVisibility("hidden");
+        toast.success("Pontuacao Actualizado com sucesso!!")
+      }).catch(error => {
+        toast.error("Ocorreu um erro ao actualizar pontuacao!!")
+      })
+
+
+    }
+
+
   }
 
+
+
   return (
-    <form onSubmit={handleSubmit(formAnswer)} noValidate>
+    <form noValidate>
       <FormControl fullWidth sx={{ m: 1 }} variant="standard">
         <InputLabel htmlFor="standard-adornment-amount">Pontuacao</InputLabel>
         <Input
-          defaultValue={answer}
+          inputRef={refAnswer}
+          multiline
+          onChange={handleChangeAnswer}
+          rows={2}
           id="answer"
           name="answer"
           startAdornment={<InputAdornment position="start">{rate}</InputAdornment>}
-          {...register("answer")}
+
 
         />
       </FormControl>
-      <Button type="submit" >Salvar</Button>
+      <Button style={{visibility: visibility}} onClick={handleClickSave} type="button" >Salvar</Button>
+      <ToastContainer />
     </form>
   );
 }

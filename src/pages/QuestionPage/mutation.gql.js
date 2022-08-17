@@ -57,3 +57,15 @@ mutation CreateAnswer($data: AnswerInput!) {
   }
 }
 `;
+
+export const UPDATE_ANSWER = gql`
+mutation UpdateAnswer($updateAnswerId: ID!, $data: AnswerInput!) {
+  updateAnswer(id: $updateAnswerId, data: $data) {
+    data {
+      attributes {
+        answer
+      }
+    }
+  }
+}
+`;
