@@ -10,6 +10,7 @@ import PushPinIcon from '@mui/icons-material/PushPin';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import GroupWorkIcon from "@mui/icons-material/GroupWork";
 import QuizIcon from '@mui/icons-material/Quiz';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import {
   Box,
   Divider,
@@ -85,11 +86,22 @@ const SideBar = () => {
               button
               onClick={() => {
                 setOpen(false);
-                navigate("/employeer/category");
+                navigate("/employeer/post-role");
               }}
             >
               <Tooltip placement="left-start" title="Gerenciar Cargos">
                 <GroupWorkIcon />
+              </Tooltip>
+            </ListItem>
+            <ListItem
+              button
+              onClick={() => {
+                setOpen(false);
+                navigate("/period");
+              }}
+            >
+              <Tooltip placement="left-start" title="Gerenciar Periodos">
+                <CalendarMonthIcon />
               </Tooltip>
             </ListItem>
             <ListItem

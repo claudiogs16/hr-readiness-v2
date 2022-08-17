@@ -18,7 +18,7 @@ const QuestionRating = ({ indicatorID }) => {
 
 
     return (
-        <MainCard title="Pontuacoes">
+        <MainCard title="Pontuacoes" >
             <Grid container spacing={3}>
 
                 <Grid key={0} item md={4} sm={6} xs={12}>

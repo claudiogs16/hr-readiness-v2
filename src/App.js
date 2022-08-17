@@ -22,6 +22,7 @@ import PrivateRoute from "./routes/private.routes";
 import PublicRoute from "./routes/public.routes";
 import PostRolePage from "./pages/PostRolePage/post-role.page";
 import { PostRoleProvider } from "./contexts/postRole-context";
+import PeriodPage from "./pages/PeriodPage/period.page";
 
 document.title = 'HR-Readiness';
 
@@ -40,7 +41,7 @@ function App() {
                     <Route path="profile" element={<ProfilePage />} />
                     <Route path="employeer" element={<EmployeerPage />} />
                     <Route
-                      path="employeer/category"
+                      path="employeer/post-role"
                       element={<PostRolePage />}
                     />
                     <Route
@@ -52,6 +53,7 @@ function App() {
                       element={<PasswordResetPage />}
                     />
                     <Route path="system" element={<SystemPage />} />
+                    <Route path="period" element={<PeriodPage />} />
                     <Route path="dimension" element={<DimensionPage />} />
                     <Route path="indicator" element={<IndicatorPage />} />
                     <Route path="question" element={<QuestionPage />} />

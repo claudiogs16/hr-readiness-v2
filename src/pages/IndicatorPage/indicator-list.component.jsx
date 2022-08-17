@@ -27,7 +27,7 @@ const ActionForm = ({ setOpen }) => {
   );
 };
 
-const IndicatorList = ({indicators, setIndicators}) => {
+const IndicatorList = ({ indicators, setIndicators }) => {
   const [open, setOpen] = useState(false)
   const [indicator, setIndicator] = useState({
     id: '',
@@ -45,15 +45,15 @@ const IndicatorList = ({indicators, setIndicators}) => {
   }
 
 
-  let indicatorsSort = indicators.sort(function(a,b){
-    if(a.attributes.indicator < b.attributes.indicator){
+  let indicatorsSort = indicators.sort(function (a, b) {
+    if (a.attributes.indicator < b.attributes.indicator) {
       return -1;
-    }else{
+    } else {
       return true;
     }
   })
 
-  function handleClickEdit(indicatorID){
+  function handleClickEdit(indicatorID) {
     let data = indicators.find(d => d.id === indicatorID)
 
     setIndicator(i => {
@@ -65,46 +65,46 @@ const IndicatorList = ({indicators, setIndicators}) => {
     })
 
     setOpen(true)
-    
+
   }
 
 
 
 
-    return (
-        <MainCard title="Lista de Indicadores" headerAction={<ActionForm setOpen={setOpen} />}>
+  return (
+    <MainCard title="Lista de Indicadores" headerAction={<ActionForm setOpen={setOpen} />}>
       <List sx={{ width: "100%", bgcolor: "background.paper" }}>
         {
           indicatorsSort && indicatorsSort.map(indicator => (
             <ListItem
-            key={indicator.id}
-            secondaryAction={
-              <IconButton aria-label="edit" onClick={() => handleClickEdit(indicator.id)}>
-                <EditIcon />
-              </IconButton>
-            }
-          >
-            <ListItemText primary={indicator.attributes.indicator} secondary={indicator.attributes.dimension.data.attributes.dimension} />
-          </ListItem> 
+              key={indicator.id}
+              secondaryAction={
+                <IconButton aria-label="edit" onClick={() => handleClickEdit(indicator.id)}>
+                  <EditIcon />
+                </IconButton>
+              }
+            >
+              <ListItemText primary={indicator.attributes.indicator} secondary={indicator.attributes.dimension.data.attributes.dimension} />
+            </ListItem>
           ))
         }
-        
-        
+
+
       </List>
       <Dialog maxWidth='md' fullScreen={false} open={open} onClose={handleClose}>
         <DialogTitle>Indicador</DialogTitle>
         <DialogContent>
-          
+
           <IndicatorForm indicator={indicator} setIndicator={setIndicator} indicators={indicators} setIndicators={setIndicators} />
-          
+
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Fechar</Button>
-          
+
         </DialogActions>
       </Dialog>
     </MainCard>
-    );
+  );
 }
- 
+
 export default IndicatorList;
